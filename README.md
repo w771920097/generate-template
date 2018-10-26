@@ -16,4 +16,4 @@
 
 >columnsMap ： 字段名以及字段在Java中的类型
 
->修改完直接运行就行
+>修改完直接运行就能在指定路径下生成  Mapper.xml,  Mapper.java,  Service.java,  ServiceImpl.java,  Domain.java,  VO.java,  Controller.java7个文件
