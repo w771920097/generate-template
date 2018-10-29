@@ -1,6 +1,6 @@
 package generate;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -14,21 +14,24 @@ public class Results {
   public static void main(String[] args) {
     String filePath = "C:\\Users\\n-340\\Desktop\\";
     String author = "wangsihong@hztianque.com";
-    String classPath = "com.tianque.tqkeeper.custom";
-    String tableName = "zk_custom_info";
-    String domainName = "customInfo";
-    Map<String, String> columnsMap = new HashMap<String, String>(){
+    String classPath = "com.tianque.monitor.metric";
+    String tableName = "zk_metric_test";
+    String domainName = "metricTest";
+    Map<String, String> columnsMap = new LinkedHashMap<String, String>(){
       
       private static final long serialVersionUID = 904293757682197882L;
 
       {
         //columns    type
         put("id", "Long");
-//        put("monitor_type", "String");
-        put("ename", "String");
-        put("cname", "String");
-        put("remark", "String");
-//        put("display", "String");
+        put("project_type", "String");
+        put("metric", "String");
+        put("tags", "String");
+        put("value", "Double");
+        put("cycle", "Long");
+        put("project_id", "Long");
+        put("collect_timestamp", "Long");
+        put("collect_time", "Date");
         put("create_date", "Date");
         put("update_date", "Date");
       }

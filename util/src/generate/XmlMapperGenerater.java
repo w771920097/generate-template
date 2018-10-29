@@ -1,5 +1,6 @@
 package generate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,12 +35,22 @@ public class XmlMapperGenerater extends AbstractGenerater{
     sb.append("\t</sql>\n\n");
     
     //add
-    sb.append("\t<insert id=\"add"+getUpperCaseDomainName()+"\" parameterType=\""+getClassPath()+".domain."+getUpperCaseDomainName()+"\">\n");
+    sb.append("\t<insert id=\"add"+getUpperCaseDomainName()+"\" parameterType=\""+getClassPath()+".domain."+getUpperCaseDomainName()+"\"\n");
     sb.append("\t\tuseGeneratedKeys=\"true\" keyProperty=\"id\">\n");
     sb.append("\t\tINSERT INTO "+getTableName()+"\n");
-    sb.append("\t\t("+String.join(",", getColumns())+")\n");
+    List<String> list = getColumns();
+    for(int i=0;i<list.size();i++){
+      if(list.get(i).equals("id"))
+          list.remove(i);
+    }
+    sb.append("\t\t("+String.join(",", list)+")\n");
     sb.append("\t\tVALUES\n");
-    sb.append("\t\t(#{"+String.join("},#{", getColumns())+"})\n");
+    list = getFields();
+    for(int i=0;i<list.size();i++){
+      if(list.get(i).equals("id"))
+          list.remove(i);
+    }
+    sb.append("\t\t(#{"+String.join("},#{", list)+"})\n");
     sb.append("\t</insert>\n\n");
     
     //getById
@@ -60,20 +71,21 @@ public class XmlMapperGenerater extends AbstractGenerater{
     
     //update
     sb.append("\t<update id=\"update"+getUpperCaseDomainName()+"\" parameterType=\""+getClassPath()+".domain."+getUpperCaseDomainName()+"\">\n");
-    sb.append("\tUPDATE "+getTableName()+" SET\n");
+    sb.append("\tUPDATE "+getTableName()+"\n");
     sb.append("\t\t<set>\n");
     for (int i = 0; i < getColumns().size(); i++) {
       String column = getColumns().get(i);
+      if ("id".equals(column)){
+        continue;
+      }
       String field = getFields().get(i);
       if ("String".equals(getColumnsMap().get(column))){
         sb.append("\t\t\t<if test=\""+field+" != null and "+field+" != ''\"> \n");
-        sb.append("\t\t\t\t"+column+" = #{"+field+"},\n");
-        sb.append("\t\t\t</if>\n");
       }else{
         sb.append("\t\t\t<if test=\""+field+" != null\"> \n");
-        sb.append("\t\t\t\t"+column+" = #{"+field+"},\n");
-        sb.append("\t\t\t</if>\n");
       }
+      sb.append("\t\t\t\t"+column+" = #{"+field+"},\n");
+      sb.append("\t\t\t</if>\n");
     }
     sb.append("\t\t</set>\n");
     sb.append("\t\tWHERE id=#{id}\n");

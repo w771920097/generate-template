@@ -57,7 +57,7 @@ public class DomainGenerater extends AbstractGenerater{
     }
     sb.append("\t@Override\n");
     sb.append("\tpublic String toString() {\n");
-    sb.append("\t\treturn super.toString()+\"ReportType [\"\n");
+    sb.append("\t\treturn super.toString()+\""+getUpperCaseDomainName()+" [\"\n");
     sb.append("\t\t\t+ \"");
     for (String field : getFields()) {
       if ("id".equals(field) || "createDate".equals(field) || "createUser".equals(field) || "updateDate".equals(field) || "updateUser".equals(field)){

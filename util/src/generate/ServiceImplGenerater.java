@@ -104,7 +104,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic PageInfo<"+getUpperCaseDomainName()+"> find"+getUpperCaseDomainName()+"ForPageHelper(\n");
     sb.append("\t\t\t"+getUpperCaseDomainName()+"VO "+getLowerCaseDomainName()+"VO) {\n");
-    sb.append("\t\tif (null == customInfoVO || null == "+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"()) {\n");
+    sb.append("\t\tif (null == "+getLowerCaseDomainName()+"VO || null == "+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"()) {\n");
     sb.append("\t\t\tthrow new BusinessValidationException(\"查询"+getLowerCaseDomainName()+"列表参数错误\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\tPageHelper.startPage("+getLowerCaseDomainName()+"VO.getPage(),"+getLowerCaseDomainName()+"VO.getRows(), \n");
