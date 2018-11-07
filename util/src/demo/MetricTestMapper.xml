@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tianque.monitor.metric.mapper.MetricTestMapper">
+	<resultMap id="metricTestResult" type="com.tianque.monitor.metric.domain.MetricTest">
+		<result property="id" column="id"/>
+		<result property="projectType" column="project_type"/>
+		<result property="metric" column="metric"/>
+		<result property="tags" column="tags"/>
+		<result property="value" column="value"/>
+		<result property="cycle" column="cycle"/>
+		<result property="projectId" column="project_id"/>
+		<result property="collectTimestamp" column="collect_timestamp"/>
+		<result property="collectTime" column="collect_time"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+
+	<sql id="columns">
+		id,project_type,metric,tags,value,cycle,project_id,collect_timestamp,collect_time,create_date,update_date
+	</sql>
+
+	<insert id="addMetricTest" parameterType="com.tianque.monitor.metric.domain.MetricTest"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO zk_metric_test
+		(project_type,metric,tags,value,cycle,project_id,collect_timestamp,collect_time,create_date,update_date)
+		VALUES
+		(#{projectType},#{metric},#{tags},#{value},#{cycle},#{projectId},#{collectTimestamp},#{collectTime},#{createDate},#{updateDate})
+	</insert>
+
+	<select id="getMetricTestById" parameterType="java.lang.Long" resultMap="metricTestResult">
+		SELECT
+		<include refid="columns" />
+		FROM zk_metric_test WHERE id=#{value}
+	</select>
+
+	<delete id="deleteMetricTestByIds">
+		DELETE FROM zk_metric_test WHERE id IN
+		<foreach collection="array" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updateMetricTest" parameterType="com.tianque.monitor.metric.domain.MetricTest">
+	UPDATE zk_metric_test
+		<set>
+			<if test="projectType != null and projectType != ''"> 
+				project_type = #{projectType},
+			</if>
+			<if test="metric != null and metric != ''"> 
+				metric = #{metric},
+			</if>
+			<if test="tags != null and tags != ''"> 
+				tags = #{tags},
+			</if>
+			<if test="value != null"> 
+				value = #{value},
+			</if>
+			<if test="cycle != null"> 
+				cycle = #{cycle},
+			</if>
+			<if test="projectId != null"> 
+				project_id = #{projectId},
+			</if>
+			<if test="collectTimestamp != null"> 
+				collect_timestamp = #{collectTimestamp},
+			</if>
+			<if test="collectTime != null"> 
+				collect_time = #{collectTime},
+			</if>
+			<if test="createDate != null"> 
+				create_date = #{createDate},
+			</if>
+			<if test="updateDate != null"> 
+				update_date = #{updateDate},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<select id="findMetricTestForList" resultMap="metricTestResult"
+		parameterType="com.tianque.monitor.metric.domain.MetricTest">
+		SELECT
+		<include refid="columns" />
+		FROM zk_metric_test
+		<where>
+			<if test="projectType != null and projectType != ''">
+				and project_type = #{projectType}
+			</if>
+			<if test="metric != null and metric != ''">
+				and metric = #{metric}
+			</if>
+			<if test="tags != null and tags != ''">
+				and tags = #{tags}
+			</if>
+			<if test="value != null ">
+				and value = #{value}
+			</if>
+			<if test="cycle != null ">
+				and cycle = #{cycle}
+			</if>
+			<if test="projectId != null ">
+				and project_id = #{projectId}
+			</if>
+			<if test="collectTimestamp != null ">
+				and collect_timestamp = #{collectTimestamp}
+			</if>
+			<if test="collectTime != null ">
+				and collect_time = #{collectTime}
+			</if>
+			<if test="createDate != null ">
+				and create_date = #{createDate}
+			</if>
+			<if test="updateDate != null ">
+				and update_date = #{updateDate}
+			</if>
+		</where>
+	</select>
+
+</mapper>
