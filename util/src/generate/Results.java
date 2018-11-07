@@ -3,6 +3,8 @@ package generate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import util.PropertiesLoader;
+
 /**
  * Results
  * @author wangsihong@hztianque.com
@@ -12,11 +14,12 @@ import java.util.Map;
 public class Results {
 
   public static void main(String[] args) {
-    String filePath = "C:\\Users\\n-340\\Desktop\\";
-    String author = "wangsihong@hztianque.com";
-    String classPath = "com.tianque.monitor.metric";
-    String tableName = "zk_metric_test";
-    String domainName = "metricTest";
+    
+    String filePath = PropertiesLoader.get("filePath");
+    String author = PropertiesLoader.get("author");
+    String classPath = PropertiesLoader.get("classPath");
+    String tableName = PropertiesLoader.get("tableName");
+    String domainName = PropertiesLoader.get("domainName");
     Map<String, String> columnsMap = new LinkedHashMap<String, String>(){
       
       private static final long serialVersionUID = 904293757682197882L;
@@ -64,7 +67,7 @@ public class Results {
     ControllerGenerater controllerGenerater = new ControllerGenerater(classPath, author, domainName);
     str = controllerGenerater.build();
     Util.generateFiles(str, filePath + controllerGenerater.getUpperCaseDomainName()+"Controller.java");
-    System.out.println(str);
+    System.out.println("成功 生成文件, 地址 > " + filePath);
     
 
   }
