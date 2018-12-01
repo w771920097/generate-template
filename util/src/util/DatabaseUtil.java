@@ -16,14 +16,14 @@ import domain.DataMeta;
 
 public class DatabaseUtil {
 
-    private static final String URL = PropertiesLoader.get("jdbc.url");
-    private static final String USERNAME = PropertiesLoader.get("jdbc.username");
-    private static final String PASSWORD = PropertiesLoader.get("jdbc.password");
+    private static final String URL = PropertiesLoad.get("jdbc.url");
+    private static final String USERNAME = PropertiesLoad.get("jdbc.username");
+    private static final String PASSWORD = PropertiesLoad.get("jdbc.password");
 
-    private static final String SQL = "SELECT * FROM ${tableName} where 1=2";// Êı¾İ¿â²Ù×÷
+    private static final String SQL = "SELECT * FROM ${tableName} where 1=2";// æ•°æ®åº“æ“ä½œ
 
     /**
-     * »ñÈ¡Êı¾İ¿âÁ¬½Ó
+     * è·å–æ•°æ®åº“è¿æ¥
      *
      * @return
      */
@@ -38,7 +38,7 @@ public class DatabaseUtil {
     }
 
     /**
-     * ¹Ø±ÕÊı¾İ¿âÁ¬½Ó
+     * å…³é—­æ•°æ®åº“è¿æ¥
      * @param conn
      */
     public static void closeConnection(Connection conn) {
@@ -52,16 +52,16 @@ public class DatabaseUtil {
     }
 
     /**
-     * »ñÈ¡Êı¾İ¿âÏÂµÄËùÓĞ±íÃû
+     * è·å–æ•°æ®åº“ä¸‹çš„æ‰€æœ‰è¡¨å
      */
     public static List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
         Connection conn = getConnection();
         ResultSet rs = null;
         try {
-            //»ñÈ¡Êı¾İ¿âµÄÔªÊı¾İ
+            //è·å–æ•°æ®åº“çš„å…ƒæ•°æ®
             DatabaseMetaData db = conn.getMetaData();
-            //´ÓÔªÊı¾İÖĞ»ñÈ¡µ½ËùÓĞµÄ±íÃû
+            //ä»å…ƒæ•°æ®ä¸­è·å–åˆ°æ‰€æœ‰çš„è¡¨å
             rs = db.getTables(null, null, null, new String[] { "TABLE" });
             while(rs.next()) {
                 tableNames.add(rs.getString(3));
@@ -80,21 +80,21 @@ public class DatabaseUtil {
     }
 
     /**
-     * »ñÈ¡±íÖĞËùÓĞ×Ö¶ÎÃû³Æ
-     * @param tableName ±íÃû
+     * è·å–è¡¨ä¸­æ‰€æœ‰å­—æ®µåç§°
+     * @param tableName è¡¨å
      * @return
      */
     public static List<String> getColumnNames(String tableName) {
         List<String> columnNames = new ArrayList<String>();
-        //ÓëÊı¾İ¿âµÄÁ¬½Ó
+        //ä¸æ•°æ®åº“çš„è¿æ¥
         Connection conn = getConnection();
         PreparedStatement pStemt = null;
         String tableSql = SQL.replace("${tableName}", tableName);
         try {
             pStemt = conn.prepareStatement(tableSql);
-            //½á¹û¼¯ÔªÊı¾İ
+            //ç»“æœé›†å…ƒæ•°æ®
             ResultSetMetaData rsmd = pStemt.getMetaData();
-            //±íÁĞÊı
+            //è¡¨åˆ—æ•°
             int size = rsmd.getColumnCount();
             for (int i = 0; i < size; i++) {
                 columnNames.add(rsmd.getColumnName(i + 1));
@@ -115,21 +115,21 @@ public class DatabaseUtil {
     }
 
     /**
-     * »ñÈ¡±íÖĞËùÓĞ×Ö¶ÎÀàĞÍ
+     * è·å–è¡¨ä¸­æ‰€æœ‰å­—æ®µç±»å‹
      * @param tableName
      * @return
      */
     public static List<String> getColumnTypes(String tableName) {
         List<String> columnTypes = new ArrayList<String>();
-        //ÓëÊı¾İ¿âµÄÁ¬½Ó
+        //ä¸æ•°æ®åº“çš„è¿æ¥
         Connection conn = getConnection();
         PreparedStatement pStemt = null;
         String tableSql = SQL.replace("${tableName}", tableName);
         try {
             pStemt = conn.prepareStatement(tableSql);
-            //½á¹û¼¯ÔªÊı¾İ
+            //ç»“æœé›†å…ƒæ•°æ®
             ResultSetMetaData rsmd = pStemt.getMetaData();
-            //±íÁĞÊı
+            //è¡¨åˆ—æ•°
             int size = rsmd.getColumnCount();
             for (int i = 0; i < size; i++) {
                 columnTypes.add(rsmd.getColumnTypeName(i + 1));
@@ -150,17 +150,17 @@ public class DatabaseUtil {
     }
 
     /**
-     * »ñÈ¡±íÖĞ×Ö¶ÎµÄËùÓĞ×¢ÊÍ
+     * è·å–è¡¨ä¸­å­—æ®µçš„æ‰€æœ‰æ³¨é‡Š
      * @param tableName
      * @return
      */
     public static List<String> getColumnComments(String tableName) {
 //        List<String> columnTypes = new ArrayList<String>();
-        //ÓëÊı¾İ¿âµÄÁ¬½Ó
+        //ä¸æ•°æ®åº“çš„è¿æ¥
         Connection conn = getConnection();
         PreparedStatement pStemt = null;
         String tableSql = SQL.replace("${tableName}", tableName);
-        List<String> columnComments = new ArrayList<String>();//ÁĞÃû×¢ÊÍ¼¯ºÏ
+        List<String> columnComments = new ArrayList<String>();//åˆ—åæ³¨é‡Šé›†åˆ
         ResultSet rs = null;
         try {
             pStemt = conn.prepareStatement(tableSql);

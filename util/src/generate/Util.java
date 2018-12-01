@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 /**
- * Ãû×Ö×ª»» NameTransformation
+ * åå­—è½¬æ¢ NameTransformation
  * 
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ25ÈÕ ÏÂÎç7:24:22
+ * @date 2018å¹´10æœˆ25æ—¥ ä¸‹åˆ7:24:22
  *
  */
 public class Util {
 
   /**
-   * Ê××ÖÄ¸´óĞ´
+   * é¦–å­—æ¯å¤§å†™
    * 
    * @param srcStr
    * @return
@@ -26,7 +26,7 @@ public class Util {
   }
 
   /**
-   * Ê××ÖÄ¸Ğ¡Ğ´
+   * é¦–å­—æ¯å°å†™
    * 
    * @param srcStr
    * @return
@@ -38,9 +38,9 @@ public class Util {
   /**
    * replaceUnderlineAndfirstToUpper
    * 
-   * @Description: Ìæ»»ÏÂ»®Ïß²¢ÈÃËüµÄÏÂÒ»¸ö×ÖÄ¸Îª´óĞ´
+   * @Description: æ›¿æ¢ä¸‹åˆ’çº¿å¹¶è®©å®ƒçš„ä¸‹ä¸€ä¸ªå­—æ¯ä¸ºå¤§å†™
    * @param source
-   * @return String ·µ»ØÀàĞÍ
+   * @return String è¿”å›ç±»å‹
    */
   public static String replaceUnderlineAndfirstToUpper(String source) {
     String[] str = source.split("_");
@@ -59,13 +59,13 @@ public class Util {
     FileOutputStream fos  = null;
     BufferedWriter bw = null;
     try {
-      // Êä³öµÄÎÄ¼ş¼ĞÂ·¾¶
+      // è¾“å‡ºçš„æ–‡ä»¶å¤¹è·¯å¾„
       // C:\\Users\\n-340\\Desktop\\test.txt
       fos  = new FileOutputStream(path);
       bw = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
       bw.write(str);
       bw.flush();
-//      bw.append(str);// ÍùÒÑÓĞµÄÎÄ¼şÉÏÌí¼Ó×Ö·û´®
+//      bw.append(str);// å¾€å·²æœ‰çš„æ–‡ä»¶ä¸Šæ·»åŠ å­—ç¬¦ä¸²
     } catch (IOException e) {
       e.printStackTrace();
     } finally {

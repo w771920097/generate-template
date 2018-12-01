@@ -8,19 +8,16 @@ import java.io.InputStream;
 import java.util.Properties;
 
 
-public class PropertiesLoader {
+public class PropertiesLoad {
   
   
-  public static void main(String[] args) {
-    String a = PropertiesLoader.get("a");
-    System.out.println("a" + a);
-  }
+
     private static Properties properties = new Properties();
 
     public static String get(String key) {
         if (properties.isEmpty()) {
             try {
-                File propertiesFile = new File(System.getProperty("user.dir")+File.separator+"env/generate.properties");
+                File propertiesFile = new File(System.getProperty("user.dir")+File.separator+"env" +File.separator+ "generate.properties");
                 InputStream in = new FileInputStream(propertiesFile);
                 properties.load(in);
             } catch (FileNotFoundException e) {
@@ -32,4 +29,13 @@ public class PropertiesLoader {
         }
         return properties.getProperty(key);
     }
+    
+    private static String getKey(String key) {
+      return properties.getProperty(key);
+    }
+    //----------------------------------------------------
+
+    public static final Long SESSION_TIME_OUT = Long.valueOf(getKey("session_time_out"));
+    
+    
 }

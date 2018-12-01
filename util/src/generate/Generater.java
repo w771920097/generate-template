@@ -3,7 +3,7 @@ package generate;
 /**
  * Generater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:43:53 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:43:53 
  *
  */
 public interface Generater {

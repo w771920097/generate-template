@@ -3,7 +3,7 @@ package generate;
 /**
  * ServiceImplGenerater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:44:21 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:44:21 
  *
  */
 public class ServiceImplGenerater extends AbstractGenerater{
@@ -45,13 +45,13 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" add"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+") {\n");
     sb.append("\t\tif ("+getLowerCaseDomainName()+" == null) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\""+getLowerCaseDomainName()+"²ÎÊıÎª¿Õ\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\""+getLowerCaseDomainName()+"å‚æ•°ä¸ºç©º\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\t"+getLowerCaseDomainName()+"Mapper.add"+getUpperCaseDomainName()+"("+getLowerCaseDomainName()+");\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+";\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"ĞÂÔö"+getLowerCaseDomainName()+"³ö´í\"+"+getLowerCaseDomainName()+", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"æ–°å¢"+getLowerCaseDomainName()+"å‡ºé”™\"+"+getLowerCaseDomainName()+", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -59,13 +59,13 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" update"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+") {\n");
     sb.append("\t\tif ("+getLowerCaseDomainName()+" == null || "+getLowerCaseDomainName()+".getId() == null) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"¸üĞÂ"+getLowerCaseDomainName()+"²ÎÊıÎª¿Õ\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"æ›´æ–°"+getLowerCaseDomainName()+"å‚æ•°ä¸ºç©º\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\t"+getLowerCaseDomainName()+"Mapper.update"+getUpperCaseDomainName()+"("+getLowerCaseDomainName()+");\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+";\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"¸üĞÂ"+getLowerCaseDomainName()+"³ö´í\"+"+getLowerCaseDomainName()+", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"æ›´æ–°"+getLowerCaseDomainName()+"å‡ºé”™\"+"+getLowerCaseDomainName()+", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -73,7 +73,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic Boolean delete"+getUpperCaseDomainName()+"ByIds(Long[] ids) {\n");
     sb.append("\t\tif (null != ids && ids.length == 0) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"É¾³ı"+getLowerCaseDomainName()+"²ÎÊıÓĞÎó\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"åˆ é™¤"+getLowerCaseDomainName()+"å‚æ•°æœ‰è¯¯\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\tLong count = "+getLowerCaseDomainName()+"Mapper.delete"+getUpperCaseDomainName()+"ByIds(ids);\n");
@@ -83,7 +83,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t\t\t\treturn false;\n");
     sb.append("\t\t\t}\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"É¾³ı"+getLowerCaseDomainName()+"³ö´í\", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"åˆ é™¤"+getLowerCaseDomainName()+"å‡ºé”™\", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -91,12 +91,12 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" get"+getUpperCaseDomainName()+"ById(Long id) {\n");
     sb.append("\t\tif (null == id) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"²éÑ¯"+getLowerCaseDomainName()+"²ÎÊı´íÎó\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"æŸ¥è¯¢"+getLowerCaseDomainName()+"å‚æ•°é”™è¯¯\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+"Mapper.get"+getUpperCaseDomainName()+"ById(id);\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"²éÑ¯"+getLowerCaseDomainName()+"³ö´í\", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"æŸ¥è¯¢"+getLowerCaseDomainName()+"å‡ºé”™\", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -105,7 +105,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\tpublic PageInfo<"+getUpperCaseDomainName()+"> find"+getUpperCaseDomainName()+"ForPageHelper(\n");
     sb.append("\t\t\t"+getUpperCaseDomainName()+"VO "+getLowerCaseDomainName()+"VO) {\n");
     sb.append("\t\tif (null == "+getLowerCaseDomainName()+"VO || null == "+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"()) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"²éÑ¯"+getLowerCaseDomainName()+"ÁĞ±í²ÎÊı´íÎó\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"æŸ¥è¯¢"+getLowerCaseDomainName()+"åˆ—è¡¨å‚æ•°é”™è¯¯\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\tPageHelper.startPage("+getLowerCaseDomainName()+"VO.getPage(),"+getLowerCaseDomainName()+"VO.getRows(), \n");
     sb.append("\t\t\t\tStringUtil.joinSortFieldOrder("+getLowerCaseDomainName()+"VO.getSidx(),"+getLowerCaseDomainName()+"VO.getSord()));\n");
@@ -113,7 +113,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t\t\tList<"+getUpperCaseDomainName()+"> list = "+getLowerCaseDomainName()+"Mapper.find"+getUpperCaseDomainName()+"ForList("+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"());\n");
     sb.append("\t\t\treturn new PageInfo<"+getUpperCaseDomainName()+">(list);\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"²éÑ¯"+getLowerCaseDomainName()+"³ö´í\"+"+getLowerCaseDomainName()+"VO, e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"æŸ¥è¯¢"+getLowerCaseDomainName()+"å‡ºé”™\"+"+getLowerCaseDomainName()+"VO, e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     

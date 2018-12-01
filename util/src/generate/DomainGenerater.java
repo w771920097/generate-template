@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * DomainGenerater
  * @author wangsihong@hztianque.com
- * @date 2018年10月26日 下午4:08:15 
+ * @date 2018脛锚10脭脗26脠脮 脧脗脦莽4:08:15 
  *
  */
 public class DomainGenerater extends AbstractGenerater{

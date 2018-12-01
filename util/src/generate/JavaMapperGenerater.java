@@ -5,7 +5,7 @@ package generate;
 /**
  * JavaMapperGenerater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:44:04 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:44:04 
  *
  */
 public class JavaMapperGenerater extends AbstractGenerater{
@@ -33,16 +33,16 @@ public class JavaMapperGenerater extends AbstractGenerater{
     //add
     sb.append("\t/**\n");
     sb.append("\t * add"+getUpperCaseDomainName()+"\n");
-    sb.append("\t * @param "+getLowerCaseDomainName()+"   Éè¶¨ÎÄ¼ş \n");
-    sb.append("\t * @return void    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @param "+getLowerCaseDomainName()+"   è®¾å®šæ–‡ä»¶ \n");
+    sb.append("\t * @return void    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\tvoid add"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+");\n\n");
     
     //update
     sb.append("\t/**\n");
     sb.append("\t * update"+getUpperCaseDomainName()+"\n");
-    sb.append("\t * @param "+getLowerCaseDomainName()+"   Éè¶¨ÎÄ¼ş \n");
-    sb.append("\t * @return void    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @param "+getLowerCaseDomainName()+"   è®¾å®šæ–‡ä»¶ \n");
+    sb.append("\t * @return void    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\tvoid update"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+");\n\n");
     
@@ -50,7 +50,7 @@ public class JavaMapperGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * delete"+getUpperCaseDomainName()+"ByIds\n");
     sb.append("\t * @param ids\n");
-    sb.append("\t * @return Long    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return Long    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\tLong delete"+getUpperCaseDomainName()+"ByIds(Long[] ids);\n\n");
     
@@ -58,7 +58,7 @@ public class JavaMapperGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * get"+getUpperCaseDomainName()+"ById\n");
     sb.append("\t * @param id\n");
-    sb.append("\t * @return "+getUpperCaseDomainName()+"    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return "+getUpperCaseDomainName()+"    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\t"+getUpperCaseDomainName()+" get"+getUpperCaseDomainName()+"ById(Long id);\n\n");
     
@@ -66,7 +66,7 @@ public class JavaMapperGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * find"+getUpperCaseDomainName()+"ForList\n");
     sb.append("\t * @param "+getLowerCaseDomainName()+"\n");
-    sb.append("\t * @return List<"+getUpperCaseDomainName()+">    ·µ»ØÀàĞÍ\n");
+    sb.append("\t * @return List<"+getUpperCaseDomainName()+">    è¿”å›ç±»å‹\n");
     sb.append("\t */\n");
     sb.append("\tList<"+getUpperCaseDomainName()+"> find"+getUpperCaseDomainName()+"ForList("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+");\n\n");
 

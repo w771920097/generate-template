@@ -1,9 +1,8 @@
 package generate;
 
-
-
-
-
+/**
+ * 
+ */
 public class ControllerGenerater extends AbstractGenerater{
 
   public ControllerGenerater(String classPath, String author, String domainName) {
@@ -62,17 +61,17 @@ public class ControllerGenerater extends AbstractGenerater{
     sb.append("\t@RequestMapping(value = \"/dispatch\")\n");
     sb.append("\tpublic String dispatch(String mode, Long id, ModelMap modelMap) {\n");
     sb.append("\t\tif (ADD.equals(mode)) {\n");
-    sb.append("\t\t//TODO ÉèÖÃÂ·¾¶\n");
+    sb.append("\t\t//TODO è®¾ç½®è·¯å¾„\n");
     sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/add"+getUpperCaseDomainName()+"Dlg\";\n");
     sb.append("\t}else if(UPDATE.equals(mode)) {\n");
     sb.append("\t\tmodelMap.put(\""+getLowerCaseDomainName()+"\", "+getLowerCaseDomainName()+"Service.get"+getUpperCaseDomainName()+"ById(id));\n");
-    sb.append("\t\t//TODO ÉèÖÃÂ·¾¶\n");
+    sb.append("\t\t//TODO è®¾ç½®è·¯å¾„\n");
     sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/update"+getUpperCaseDomainName()+"Dlg\";\n");
     sb.append("\t}else if(LIST.equals(mode)) {\n");
-    sb.append("\t\t//TODO ÉèÖÃÂ·¾¶\n");
+    sb.append("\t\t//TODO è®¾ç½®è·¯å¾„\n");
     sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"List\";\n");
     sb.append("\t}\n");
-    sb.append("\t//TODO ÉèÖÃÂ·¾¶\n");
+    sb.append("\t//TODO è®¾ç½®è·¯å¾„\n");
     sb.append("\treturn \"/"+getLowerCaseDomainName()+"/add"+getUpperCaseDomainName()+"Dlg\";\n");
     sb.append("\t}\n\n");
 

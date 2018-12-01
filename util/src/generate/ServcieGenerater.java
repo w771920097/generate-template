@@ -3,7 +3,7 @@ package generate;
 /**
  * ServcieGenerater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:43:41 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:43:41 
  *
  */
 public class ServcieGenerater extends AbstractGenerater{
@@ -32,7 +32,7 @@ public class ServcieGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * add"+getUpperCaseDomainName()+"\n");
     sb.append("\t * @param "+getLowerCaseDomainName()+"\n");
-    sb.append("\t * @return "+getUpperCaseDomainName()+"    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return "+getUpperCaseDomainName()+"    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\t"+getUpperCaseDomainName()+" add"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+");\n\n");
     
@@ -40,7 +40,7 @@ public class ServcieGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * update"+getUpperCaseDomainName()+"\n");
     sb.append("\t * @param "+getLowerCaseDomainName()+"\n");
-    sb.append("\t * @return "+getUpperCaseDomainName()+"    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return "+getUpperCaseDomainName()+"    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\t"+getUpperCaseDomainName()+" update"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+");\n\n");
     
@@ -48,7 +48,7 @@ public class ServcieGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * delete"+getUpperCaseDomainName()+"ByIds\n");
     sb.append("\t * @param ids\n");
-    sb.append("\t * @return Boolean    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return Boolean    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\tBoolean delete"+getUpperCaseDomainName()+"ByIds(Long[] ids);\n\n");
     
@@ -56,7 +56,7 @@ public class ServcieGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * get"+getUpperCaseDomainName()+"ById\n");
     sb.append("\t * @param id\n");
-    sb.append("\t * @return "+getUpperCaseDomainName()+"    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return "+getUpperCaseDomainName()+"    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\t"+getUpperCaseDomainName()+" get"+getUpperCaseDomainName()+"ById(Long id);  \n\n");
     
@@ -64,7 +64,7 @@ public class ServcieGenerater extends AbstractGenerater{
     sb.append("\t/**\n");
     sb.append("\t * find"+getUpperCaseDomainName()+"ForPageHelper\n");
     sb.append("\t * @param "+getLowerCaseDomainName()+"VO\n");
-    sb.append("\t * @return PageInfo<"+getUpperCaseDomainName()+">    ·µ»ØÀàĞÍ \n");
+    sb.append("\t * @return PageInfo<"+getUpperCaseDomainName()+">    è¿”å›ç±»å‹ \n");
     sb.append("\t */\n");
     sb.append("\tPageInfo<"+getUpperCaseDomainName()+"> find"+getUpperCaseDomainName()+"ForPageHelper("+getUpperCaseDomainName()+"VO "+getLowerCaseDomainName()+"VO);\n\n");
     

@@ -3,23 +3,23 @@ package generate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import util.PropertiesLoader;
+import util.PropertiesLoad;
 
 /**
  * Results
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç4:08:41 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ4:08:41 
  *
  */
 public class Results {
 
   public static void main(String[] args) {
     
-    String filePath = PropertiesLoader.get("filePath");
-    String author = PropertiesLoader.get("author");
-    String classPath = PropertiesLoader.get("classPath");
-    String tableName = PropertiesLoader.get("tableName");
-    String domainName = PropertiesLoader.get("domainName");
+    String filePath = PropertiesLoad.get("filePath");
+    String author = PropertiesLoad.get("author");
+    String classPath = PropertiesLoad.get("classPath");
+    String tableName = PropertiesLoad.get("tableName");
+    String domainName = PropertiesLoad.get("domainName");
     Map<String, String> columnsMap = new LinkedHashMap<String, String>(){
       
       private static final long serialVersionUID = 904293757682197882L;
@@ -67,7 +67,7 @@ public class Results {
     ControllerGenerater controllerGenerater = new ControllerGenerater(classPath, author, domainName);
     str = controllerGenerater.build();
     Util.generateFiles(str, filePath + controllerGenerater.getUpperCaseDomainName()+"Controller.java");
-    System.out.println("³É¹¦ Éú³ÉÎÄ¼ş, µØÖ· > " + filePath);
+    System.out.println("æˆåŠŸ ç”Ÿæˆæ–‡ä»¶, åœ°å€ > " + filePath);
     
 
   }
