@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * AbstractGenerater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:43:48 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:43:48 
  *
  */
 public abstract class AbstractGenerater implements Generater{
@@ -63,7 +63,7 @@ public abstract class AbstractGenerater implements Generater{
   }
   
   private String getDateString(Date date) {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕHH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥HH:mm:ss");
     return sdf.format(date);
   }
   
