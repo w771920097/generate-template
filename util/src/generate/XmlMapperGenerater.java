@@ -6,11 +6,11 @@ import java.util.Map;
 /**
  * GenerateXmlMapper
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç1:44:11 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:44:21 
  */
 public class XmlMapperGenerater extends AbstractGenerater{    
   
-  public XmlMapperGenerater(String classPath, Map<String, String> columnsMap, String tableName, String domainName) {
+  public XmlMapperGenerater(String classPath, Map<String, String> columnsMap, String tableName, String domainName){
     setColumnsMap(columnsMap);
     setTableName(tableName);
     setClassPath(classPath);

@@ -4,7 +4,6 @@ package generate;
  * ServcieGenerater
  * @author wangsihong@hztianque.com
  * @date 2018年10月26日 下午1:43:41 
- *
  */
 public class ServcieGenerater extends AbstractGenerater{
   

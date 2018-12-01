@@ -1,7 +1,9 @@
 package generate;
 
 /**
- * 
+ * ControllerGenerater 
+ * @author wangsihong@hztianque.com   
+ * @date 2018年10月26日 下午1:44:21 
  */
 public class ControllerGenerater extends AbstractGenerater{
 
@@ -36,12 +38,37 @@ public class ControllerGenerater extends AbstractGenerater{
     sb.append("@Controller\n");
     sb.append("@RequestMapping(value = \"/"+getLowerCaseDomainName()+"\")\n");
     sb.append("public class "+getUpperCaseDomainName()+"Controller {\n\n");
-    sb.append("\tprivate static final String LIST = \"list\";\n");
     sb.append("\tprivate static final String ADD = \"add\";\n");
+    sb.append("\tprivate static final String MODE = \"mode\";\n");
+    sb.append("\tprivate static final String VIEW = \"view\";\n");
     sb.append("\tprivate static final String UPDATE = \"update\";\n\n");
     
     sb.append("\t@Autowired\n");
     sb.append("\tprivate "+getUpperCaseDomainName()+"Service "+getLowerCaseDomainName()+"Service;\n\n");
+    
+    //dipatch
+    sb.append("\t@RequestMapping(value = \"/dispatch\")\n");
+    sb.append("\tpublic String dispatch(String mode, Long id, ModelMap modelMap) {\n");
+    sb.append("\t\tmodelMap.put(MODE, mode);\n");
+    sb.append("\t\tif (ADD.equals(mode)) {\n");
+    sb.append("\t\t//TODO 设置路径\n");
+    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"Dlg\";\n");
+    sb.append("\t}else if(UPDATE.equals(mode) || VIEW.equals(mode)) {\n");
+    sb.append("\t\tmodelMap.put(\""+getLowerCaseDomainName()+"\", "+getLowerCaseDomainName()+"Service.get"+getUpperCaseDomainName()+"ById(id));\n");
+    sb.append("\t\t//TODO 设置路径\n");
+    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"Dlg\";\n");
+    sb.append("\t}\n");
+    sb.append("\t//TODO 设置路径\n");
+    sb.append("\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"Dlg\";\n");
+    sb.append("\t}\n\n");
+    
+    //listPage
+    sb.append("\t@PermissionFilter(ename = \""+getLowerCaseDomainName()+"\")\n");
+    sb.append("\t@RequestMapping(value = \"/listPage\")\n");
+    sb.append("\tpublic String listPage() {\n");
+    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"List\";\n");
+    sb.append("\t}\n");
+    sb.append("\n");
     
     //add
     sb.append("\t@RequestMapping(value = \"/add"+getUpperCaseDomainName()+"\")\n");
@@ -57,23 +84,6 @@ public class ControllerGenerater extends AbstractGenerater{
     sb.append("\t\treturn "+getLowerCaseDomainName()+"Service.update"+getUpperCaseDomainName()+"("+getLowerCaseDomainName()+");\n");
     sb.append("\t}\n\n");
     
-    //dipatch
-    sb.append("\t@RequestMapping(value = \"/dispatch\")\n");
-    sb.append("\tpublic String dispatch(String mode, Long id, ModelMap modelMap) {\n");
-    sb.append("\t\tif (ADD.equals(mode)) {\n");
-    sb.append("\t\t//TODO 设置路径\n");
-    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/add"+getUpperCaseDomainName()+"Dlg\";\n");
-    sb.append("\t}else if(UPDATE.equals(mode)) {\n");
-    sb.append("\t\tmodelMap.put(\""+getLowerCaseDomainName()+"\", "+getLowerCaseDomainName()+"Service.get"+getUpperCaseDomainName()+"ById(id));\n");
-    sb.append("\t\t//TODO 设置路径\n");
-    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/update"+getUpperCaseDomainName()+"Dlg\";\n");
-    sb.append("\t}else if(LIST.equals(mode)) {\n");
-    sb.append("\t\t//TODO 设置路径\n");
-    sb.append("\t\treturn \"/"+getLowerCaseDomainName()+"/"+getLowerCaseDomainName()+"List\";\n");
-    sb.append("\t}\n");
-    sb.append("\t//TODO 设置路径\n");
-    sb.append("\treturn \"/"+getLowerCaseDomainName()+"/add"+getUpperCaseDomainName()+"Dlg\";\n");
-    sb.append("\t}\n\n");
 
 //  deleteByIds
     sb.append("\t@RequestMapping(value = \"/delete"+getUpperCaseDomainName()+"ByIds\")\n");

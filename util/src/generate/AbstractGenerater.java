@@ -10,13 +10,13 @@ import java.util.Map;
 /**
  * AbstractGenerater
  * @author wangsihong@hztianque.com
- * @date 2018年10月26日 下午1:43:48 
- *
+ * @date 2018年10月26日 下午1:44:21 
  */
 public abstract class AbstractGenerater implements Generater{
 
   private String classPath;
   private String doMainName;
+  private String domainCname;
   private String lowerCaseDomainName;
   private String upperCaseDomainName;
   private List<String> columns;
@@ -214,5 +214,13 @@ public abstract class AbstractGenerater implements Generater{
         + ", date=" + date + ", mapper=" + mapper + ", domain=" + domain
         + ", vo=" + vo + ", service=" + service + ", serviceImpl="
         + serviceImpl + "]";
+  }
+
+  public String getDomainCname() {
+    return domainCname;
+  }
+
+  public void setDomainCname(String domainCname) {
+    this.domainCname = domainCname;
   }
 }

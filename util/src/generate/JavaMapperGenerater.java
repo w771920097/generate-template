@@ -1,12 +1,9 @@
 package generate;
 
-
-
 /**
  * JavaMapperGenerater
  * @author wangsihong@hztianque.com
  * @date 2018年10月26日 下午1:44:04 
- *
  */
 public class JavaMapperGenerater extends AbstractGenerater{
 

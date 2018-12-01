@@ -8,10 +8,11 @@ package generate;
  */
 public class ServiceImplGenerater extends AbstractGenerater{
 
-  public ServiceImplGenerater(String classPath, String domainName, String author) {
+  public ServiceImplGenerater(String classPath, String domainName, String author, String domainCname) {
     setAuthor(author);
     setDoMainName(domainName);
     setClassPath(classPath);
+    setDomainCname(domainCname);
   }
   
   @Override
@@ -45,13 +46,13 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" add"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+") {\n");
     sb.append("\t\tif ("+getLowerCaseDomainName()+" == null) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\""+getLowerCaseDomainName()+"参数为空\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"新增"+getDomainCname()+"参数为空\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\t"+getLowerCaseDomainName()+"Mapper.add"+getUpperCaseDomainName()+"("+getLowerCaseDomainName()+");\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+";\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"新增"+getLowerCaseDomainName()+"出错\"+"+getLowerCaseDomainName()+", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"新增"+getDomainCname()+"出错\"+"+getLowerCaseDomainName()+", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -59,13 +60,13 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" update"+getUpperCaseDomainName()+"("+getUpperCaseDomainName()+" "+getLowerCaseDomainName()+") {\n");
     sb.append("\t\tif ("+getLowerCaseDomainName()+" == null || "+getLowerCaseDomainName()+".getId() == null) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"更新"+getLowerCaseDomainName()+"参数为空\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"更新"+getDomainCname()+"参数为空\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\t"+getLowerCaseDomainName()+"Mapper.update"+getUpperCaseDomainName()+"("+getLowerCaseDomainName()+");\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+";\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"更新"+getLowerCaseDomainName()+"出错\"+"+getLowerCaseDomainName()+", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"更新"+getDomainCname()+"出错\"+"+getLowerCaseDomainName()+", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -73,7 +74,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic Boolean delete"+getUpperCaseDomainName()+"ByIds(Long[] ids) {\n");
     sb.append("\t\tif (null != ids && ids.length == 0) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"删除"+getLowerCaseDomainName()+"参数有误\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"删除"+getDomainCname()+"参数有误\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\tLong count = "+getLowerCaseDomainName()+"Mapper.delete"+getUpperCaseDomainName()+"ByIds(ids);\n");
@@ -83,7 +84,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t\t\t\treturn false;\n");
     sb.append("\t\t\t}\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"删除"+getLowerCaseDomainName()+"出错\", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"删除"+getDomainCname()+"出错\", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -91,12 +92,12 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t@Override\n");
     sb.append("\tpublic "+getUpperCaseDomainName()+" get"+getUpperCaseDomainName()+"ById(Long id) {\n");
     sb.append("\t\tif (null == id) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"查询"+getLowerCaseDomainName()+"参数错误\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"查询"+getDomainCname()+"参数错误\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\ttry {\n");
     sb.append("\t\t\treturn "+getLowerCaseDomainName()+"Mapper.get"+getUpperCaseDomainName()+"ById(id);\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"查询"+getLowerCaseDomainName()+"出错\", e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"查询"+getDomainCname()+"出错\", e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     
@@ -105,7 +106,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\tpublic PageInfo<"+getUpperCaseDomainName()+"> find"+getUpperCaseDomainName()+"ForPageHelper(\n");
     sb.append("\t\t\t"+getUpperCaseDomainName()+"VO "+getLowerCaseDomainName()+"VO) {\n");
     sb.append("\t\tif (null == "+getLowerCaseDomainName()+"VO || null == "+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"()) {\n");
-    sb.append("\t\t\tthrow new BusinessValidationException(\"查询"+getLowerCaseDomainName()+"列表参数错误\");\n");
+    sb.append("\t\t\tthrow new BusinessValidationException(\"查询"+getDomainCname()+"列表参数错误\");\n");
     sb.append("\t\t}\n");
     sb.append("\t\tPageHelper.startPage("+getLowerCaseDomainName()+"VO.getPage(),"+getLowerCaseDomainName()+"VO.getRows(), \n");
     sb.append("\t\t\t\tStringUtil.joinSortFieldOrder("+getLowerCaseDomainName()+"VO.getSidx(),"+getLowerCaseDomainName()+"VO.getSord()));\n");
@@ -113,7 +114,7 @@ public class ServiceImplGenerater extends AbstractGenerater{
     sb.append("\t\t\tList<"+getUpperCaseDomainName()+"> list = "+getLowerCaseDomainName()+"Mapper.find"+getUpperCaseDomainName()+"ForList("+getLowerCaseDomainName()+"VO.get"+getUpperCaseDomainName()+"());\n");
     sb.append("\t\t\treturn new PageInfo<"+getUpperCaseDomainName()+">(list);\n");
     sb.append("\t\t} catch (Exception e) {\n");
-    sb.append("\t\t\tthrow new ServiceValidationException(\"查询"+getLowerCaseDomainName()+"出错\"+"+getLowerCaseDomainName()+"VO, e);\n");
+    sb.append("\t\t\tthrow new ServiceValidationException(\"查询"+getDomainCname()+"出错\"+"+getLowerCaseDomainName()+"VO, e);\n");
     sb.append("\t\t}\n");
     sb.append("\t}\n\n");
     

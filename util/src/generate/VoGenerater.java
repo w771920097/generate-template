@@ -4,7 +4,7 @@ package generate;
 /**
  * VoGenerater
  * @author wangsihong@hztianque.com
- * @date 2018Äê10ÔÂ26ÈÕ ÏÂÎç3:52:18 
+ * @date 2018å¹´10æœˆ26æ—¥ ä¸‹åˆ1:44:21 
  */
 public class VoGenerater extends AbstractGenerater{
   

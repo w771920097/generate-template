@@ -1,8 +1,8 @@
 package generate;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -58,6 +58,7 @@ public class Util {
   public static void generateFiles(String str, String path) {
     FileOutputStream fos  = null;
     BufferedWriter bw = null;
+    
     try {
       // 输出的文件夹路径
       // C:\\Users\\n-340\\Desktop\\test.txt
