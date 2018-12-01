@@ -3,17 +3,17 @@ package domain;
 public class DataMeta {
   
   /**
-   * ×Ö¶ÎÃû
+   * å­—æ®µå
    */
   private String columnName;
   
   /**
-   * ×Ö¶ÎÀàĞÍ
+   * å­—æ®µç±»å‹
    */
   private String columnType;
   
   /**
-   * ×Ö¶Î×¢ÊÍ
+   * æ³¨é‡Š
    */
   private String commont;
 
