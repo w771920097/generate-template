@@ -8,10 +8,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 
-public class PropertiesLoad {
+public class PropertiesLoad{
   
-  
-
     private static Properties properties = new Properties();
 
     public static String get(String key) {
@@ -27,15 +25,11 @@ public class PropertiesLoad {
             }
 
         }
-        return properties.getProperty(key);
+        return getKey(key);
     }
     
     private static String getKey(String key) {
       return properties.getProperty(key);
     }
-    //----------------------------------------------------
-
-    public static final Long SESSION_TIME_OUT = Long.valueOf(getKey("session_time_out"));
-    
     
 }

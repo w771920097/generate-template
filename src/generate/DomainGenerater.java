@@ -2,6 +2,8 @@ package generate;
 
 import java.util.Map;
 
+import util.CommentUtil;
+
 /**
  * DomainGenerater
  * @author wangsihong@hztianque.com
@@ -45,11 +47,11 @@ public class DomainGenerater extends AbstractGenerater{
         continue;
       }
       String type = fieldsMap.get(field);
-      sb.append("\tpublic "+type+" get"+Util.toUpperCaseFirstOne(field)+"() {\n");
+      sb.append("\tpublic "+type+" get"+CommentUtil.toUpperCaseFirstOne(field)+"() {\n");
       sb.append("\t\treturn "+field+"; \n");
       sb.append("\t}\n\n");
       
-      sb.append("\tpublic void set"+Util.toUpperCaseFirstOne(field)+"("+type+" "+field+") {\n");
+      sb.append("\tpublic void set"+CommentUtil.toUpperCaseFirstOne(field)+"("+type+" "+field+") {\n");
       sb.append("\t\tthis."+field+" = "+field+";\n");
       sb.append("\t}\n\n");
       

@@ -3,6 +3,8 @@ package generate;
 import java.util.List;
 import java.util.Map;
 
+import util.CommentUtil;
+
 /**
  * GenerateXmlMapper
  * @author wangsihong@hztianque.com
@@ -27,7 +29,7 @@ public class XmlMapperGenerater extends AbstractGenerater{
     sb.append("<mapper namespace=\"").append(namespace).append("\">\n");
     sb.append("\t<resultMap id=\"").append(getLowerCaseDomainName()).append("Result\" type=\"").append(getClassPath()).append(".domain.").append(getUpperCaseDomainName()).append("\">\n");
     for (String column : getColumns()) {
-      sb.append("\t\t<result property=\""+Util.replaceUnderlineAndfirstToUpper(column)+"\" column=\""+column+"\"/>\n");
+      sb.append("\t\t<result property=\""+CommentUtil.replaceUnderlineAndfirstToUpper(column)+"\" column=\""+column+"\"/>\n");
     }
     sb.append("\t</resultMap>\n\n");
     sb.append("\t<sql id=\"columns\">\n");

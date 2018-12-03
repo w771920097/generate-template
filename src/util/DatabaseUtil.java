@@ -12,15 +12,27 @@ import java.util.List;
 
 import com.sun.xml.internal.ws.util.UtilException;
 
-import domain.DataMeta;
+import constant.Constant;
+import generateplus.domain.DataMeta;
 
 public class DatabaseUtil {
 
-    private static final String URL = PropertiesLoad.get("jdbc.url");
-    private static final String USERNAME = PropertiesLoad.get("jdbc.username");
-    private static final String PASSWORD = PropertiesLoad.get("jdbc.password");
+    private static final String URL = Constant.JDBC_URL;
+    private static final String USERNAME = Constant.JDBC_USERNAME;
+    private static final String PASSWORD = Constant.JDBC_PASSWORD;
 
     private static final String SQL = "SELECT * FROM ${tableName} where 1=2";// 数据库操作
+    
+    private static final String QUERY_DATA_META_SQL = " SELECT \r\n" + 
+    		"   TABLE_SCHEMA AS `databaseName`,\r\n" + 
+    		"   TABLE_NAME AS `tableName`,\r\n" + 
+    		"   COLUMN_NAME AS `columnName`,\r\n" + 
+    		"   DATA_TYPE AS `columnType`,\r\n" + 
+    		"   COLUMN_COMMENT AS `columnComment` \r\n" + 
+    		" FROM\r\n" + 
+    		"   `information_schema`.`COLUMNS` \r\n" + 
+    		" WHERE `TABLE_SCHEMA` = '数据库名称' \r\n" + 
+    		"   AND `TABLE_NAME` = '表名' ;";
 
     /**
      * 获取数据库连接
@@ -107,7 +119,7 @@ public class DatabaseUtil {
                     pStemt.close();
                     closeConnection(conn);
                 } catch (SQLException e) {
-                    throw new UtilException("getColumnNames close pstem and connection failure", e);
+                    throw new UtilException("获取字段名   关闭结果集和jdbc连接失败", e);
                 }
             }
         }
@@ -142,7 +154,7 @@ public class DatabaseUtil {
                     pStemt.close();
                     closeConnection(conn);
                 } catch (SQLException e) {
-                    throw new UtilException("getColumnTypes close pstem and connection failure", e);
+                    throw new UtilException("获取字段类型  关闭结果集和jdbc连接失败", e);
                 }
             }
         }
@@ -176,16 +188,76 @@ public class DatabaseUtil {
                     rs.close();
                     closeConnection(conn);
                 } catch (SQLException e) {
-                    throw new UtilException("getColumnComments close ResultSet and connection failure", e);
+                    throw new UtilException("获取字段注释 关闭结果集和jdbc连接失败", e);
                 }
             }
         }
         return columnComments;
     }
+
+
+	public static List<DataMeta> getDataMetaListByTableName(String tableName) {
+        List<String> columnNames = new ArrayList<String>();	//列名
+      List<String> columnTypes = new ArrayList<String>();	//列类型
+      List<String> columnComments = new ArrayList<String>();//列注释
+      List<DataMeta> list = new ArrayList<DataMeta>();		//数据元
+      //与数据库的连接
+      Connection conn = getConnection();
+      PreparedStatement pStemt = null;
+      String tableSql = SQL.replace("${tableName}", tableName);
+      ResultSet rs = null;
+      try {
+          pStemt = conn.prepareStatement(tableSql);
+          rs = pStemt.executeQuery("show full columns from " + tableName);
+
+          while (rs.next()) {
+              columnComments.add(rs.getString("Comment"));
+          }
+          
+          //结果集元数据
+          ResultSetMetaData rsmd = pStemt.getMetaData();
+          //表列数
+          int size = rsmd.getColumnCount();
+          for (int i = 0; i < size; i++) {
+              columnTypes.add(rsmd.getColumnTypeName(i + 1));
+              columnNames.add(rsmd.getColumnName(i + 1));
+          }
+          //封装到DataMeta
+          for (int i = 0; i < columnNames.size(); i++) {
+        	  DataMeta dataMeta = new DataMeta();
+        	  columnNames.get(i);
+        	  dataMeta.setColumnType(columnTypes.get(i));
+        	  dataMeta.setColumnName(columnNames.get(i));
+        	  dataMeta.setCommont(columnComments.get(i));
+        	  list.add(dataMeta);
+		}
+      } catch (SQLException e) {
+          e.printStackTrace();
+      } finally {
+          if (rs != null) {
+              try {
+                  rs.close();
+                  closeConnection(conn);
+              } catch (SQLException e) {
+                  throw new UtilException("获取数据元 关闭结果集和jdbc连接失败", e);
+              }
+          }
+      }
+		return list;
+	}
+	
     public static void main(String[] args) {
-        List<String> tableNames = getTableNames();
-        System.out.println("tableNames:" + tableNames);
-        for (String tableName : tableNames) {
+    	
+
+    	String tableName = Constant.TABLE_NAME;
+        List<DataMeta> dataMetaList = getDataMetaListByTableName(tableName);
+//        List<String> tableNames = getTableNames();
+//        System.out.println("tableNames:" + tableNames);
+        System.out.println("tableName:" + tableName);
+        for (DataMeta dataMeta : dataMetaList) {
+        	System.out.print("," + dataMeta.getColumnName());
+		}
+        /*for (String tableName : tableNames) {
           List<DataMeta> dataMetaList = new ArrayList<DataMeta>();
           
           List<String> columnNames = getColumnNames(tableName);
@@ -201,6 +273,6 @@ public class DatabaseUtil {
             
           }
           System.out.println("dataMetaList>>" + dataMetaList);
-        }
+        }*/
     }
 }

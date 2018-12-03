@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import util.CommentUtil;
+
 /**
  * AbstractGenerater
  * @author wangsihong@hztianque.com
@@ -37,8 +39,8 @@ public abstract class AbstractGenerater implements Generater{
   
   public String build(){
     if (null != this.doMainName){
-      this.lowerCaseDomainName = Util.toLowerCaseFirstOne(this.doMainName);
-      this.upperCaseDomainName = Util.toUpperCaseFirstOne(this.doMainName);
+      this.lowerCaseDomainName = CommentUtil.toLowerCaseFirstOne(this.doMainName);
+      this.upperCaseDomainName = CommentUtil.toUpperCaseFirstOne(this.doMainName);
     }
     if (null != this.columnsMap){
       this.columns = new ArrayList<String>();
@@ -46,16 +48,16 @@ public abstract class AbstractGenerater implements Generater{
       this.fields = new ArrayList<String>();
       this.upperCaseFields = new ArrayList<String>(); 
       for (String column : columnsMap.keySet()) {
-        String field = Util.replaceUnderlineAndfirstToUpper(column);
+        String field = CommentUtil.replaceUnderlineAndfirstToUpper(column);
         columns.add(column);
         fields.add(field);
-        upperCaseFields.add(Util.toUpperCaseFirstOne(field));
+        upperCaseFields.add(CommentUtil.toUpperCaseFirstOne(field));
         fieldsMap.put(field, columnsMap.get(column));
       }
     }else if (null != this.columns){
       fields = new ArrayList<String>();
       for (String column : columns) {
-        fields.add(Util.replaceUnderlineAndfirstToUpper(column));
+        fields.add(CommentUtil.replaceUnderlineAndfirstToUpper(column));
       }
     }
     this.date = getDateString(new Date());

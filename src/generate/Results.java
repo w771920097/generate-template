@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import util.CommentUtil;
+
 /**
  * Results
  * @author wangsihong@hztianque.com
@@ -28,7 +30,6 @@ public class Results {
     String domainName = "jobState";
     String domainCname = "任务状态";
     Map<String, String> columnsMap = new LinkedHashMap<String, String>(){
-      
       
       private static final long serialVersionUID = 904293757682197882L;
 
@@ -76,50 +77,50 @@ public class Results {
     str = xmlMapperGenerater.build();
     String path = filePath + "mapper" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + xmlMapperGenerater.getUpperCaseDomainName() + "Mapper.xml");
+    CommentUtil.generateFiles(str, path + xmlMapperGenerater.getUpperCaseDomainName() + "Mapper.xml");
     
     JavaMapperGenerater javaMapperGenerater = new JavaMapperGenerater(domainName, classPath, author);
     str = javaMapperGenerater.build();
     path = filePath + "mapper" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + javaMapperGenerater.getUpperCaseDomainName() + "Mapper.java");
+    CommentUtil.generateFiles(str, path + javaMapperGenerater.getUpperCaseDomainName() + "Mapper.java");
     
     ServiceImplGenerater serviceImplGenerater = new ServiceImplGenerater(classPath, domainName, author, domainCname);
     str = serviceImplGenerater.build();
     path = filePath + "service" +File.separator + "impl" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + serviceImplGenerater.getUpperCaseDomainName() + "ServiceImpl.java");
+    CommentUtil.generateFiles(str, path + serviceImplGenerater.getUpperCaseDomainName() + "ServiceImpl.java");
     
     ServcieGenerater servcieGenerater = new ServcieGenerater(classPath, author, domainName);
     str = servcieGenerater.build();
     path = filePath + "service" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + servcieGenerater.getUpperCaseDomainName() + "Service.java");
+    CommentUtil.generateFiles(str, path + servcieGenerater.getUpperCaseDomainName() + "Service.java");
     
     DomainGenerater domainGenerater = new DomainGenerater(classPath, author, domainName, columnsMap); 
     str = domainGenerater.build();
     path = filePath + "domain" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + domainGenerater.getUpperCaseDomainName() + ".java");
+    CommentUtil.generateFiles(str, path + domainGenerater.getUpperCaseDomainName() + ".java");
     
     VoGenerater voGenerater = new VoGenerater(classPath, domainName, author);
     str = voGenerater.build();
     path = filePath + "vo" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + voGenerater.getUpperCaseDomainName() + "VO.java");
+    CommentUtil.generateFiles(str, path + voGenerater.getUpperCaseDomainName() + "VO.java");
     
     ControllerGenerater controllerGenerater = new ControllerGenerater(classPath, author, domainName);
     str = controllerGenerater.build();
     path = filePath + "controller" +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + controllerGenerater.getUpperCaseDomainName()+"Controller.java");
+    CommentUtil.generateFiles(str, path + controllerGenerater.getUpperCaseDomainName()+"Controller.java");
     
     ListJspGenerater ListJspGenerater = new ListJspGenerater(domainName, domainCname, columnsMap);
     str = ListJspGenerater.build();
     //jspPath
     path = jspPath + ListJspGenerater.getDoMainName() +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + ListJspGenerater.getDoMainName()+"List.jsp");
+    CommentUtil.generateFiles(str, path + ListJspGenerater.getDoMainName()+"List.jsp");
     
     
     //DlgJspGenerater
@@ -127,7 +128,7 @@ public class Results {
     str = dlgJspGenerater.build();
     path = jspPath + dlgJspGenerater.getDoMainName() +File.separator;
     generaterPath(path);
-    Util.generateFiles(str, path + dlgJspGenerater.getDoMainName()+"Dlg.jsp");
+    CommentUtil.generateFiles(str, path + dlgJspGenerater.getDoMainName()+"Dlg.jsp");
     
     System.out.println("输出路径> " + filePath);
     
