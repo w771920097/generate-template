@@ -7,7 +7,7 @@ import com.tianque.monitor.metric.vo.MetricTestVO;
 /**
  * MetricTestService
  * @author wangsihong@hztianque.com
- * @date 2018年11月07日08:33:11
+ * @date 2018年12月05日 17:45:47
  */
 public interface MetricTestService {
 

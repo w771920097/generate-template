@@ -6,12 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import constant.Constant;
+import constant.TypeConversionEnum;
 import generateplus.domain.BasicData;
 import generateplus.domain.DataMeta;
 
@@ -25,7 +24,16 @@ import generateplus.domain.DataMeta;
 public class CommentUtil {
 	
 	private static BasicData basicData;
+	
+	public static void main(String[] args) {
+		String path = Constant.FILE_PATH;
+		System.out.println(File.separator);
+		System.out.println(path);
+		path = path.replace("/", "\\").replace("\\", File.separator);
 
+		System.out.println(path);
+	}
+	
 	/**
 	 * 首字母大写
 	 * 
@@ -66,6 +74,92 @@ public class CommentUtil {
 		return sb.toString();
 	}
 
+	public static BasicData getBasicData() {
+		if (basicData == null) {
+			setTempBasicData();
+			setExtendBasicData();
+		}
+		return basicData;
+	}
+	
+
+	/**
+	 * 设置基本的模板数据
+	 * @return void    返回类型
+	 */
+	private static void setTempBasicData() {
+		basicData = new BasicData();
+		basicData.setDomainCname(Constant.DOMAIN_CNAME);
+		basicData.setDomainName(Constant.DOMAIN_NAME);
+		basicData.setAuthor(Constant.AUTHOR);
+		basicData.setTableName(Constant.TABLE_NAME);
+		basicData.setClassPath(Constant.CLASS_PAHT);
+		basicData.setFilePath(Constant.FILE_PATH);
+		
+		basicData.setDate(getDateString(new Date()));
+		
+		List<DataMeta> dataMetaList = DatabaseUtil.getDataMetaListByTableName(Constant.TABLE_NAME);
+		if (dataMetaList == null || dataMetaList.size() < 0) {
+			throw new RuntimeException("表字段数据不存在");
+		}
+
+		basicData.setDataMetaList(dataMetaList);
+		
+	}
+	
+	/**
+	 * 设置拓展的模板数据
+	 * @return void    返回类型
+	 */
+	private static void setExtendBasicData() {
+		
+		List<String> columns = basicData.getColumns();
+		List<String> fields = basicData.getFields();
+		List<String> fieldTypes = basicData.getFieldTypes();
+		List<String> upperCaseFields = basicData.getUpperCaseFields();
+		List<DataMeta> dataMetaList = basicData.getDataMetaList();
+		
+		if (null != basicData.getDomainName()) {
+			basicData.setLowerCaseDomainName(CommentUtil.toLowerCaseFirstOne(basicData.getDomainName()));
+			basicData.setUpperCaseDomainName(CommentUtil.toUpperCaseFirstOne(basicData.getDomainName()));
+		}
+		for (DataMeta dataMeta : dataMetaList) {
+			String[] columnType = dataMeta.getColumnType().split(" ");
+			String fieldType = TypeConversionEnum.getJavaTypeByMysqlType(columnType[0]);
+			fieldTypes.add(fieldType);
+			
+			String columnName = dataMeta.getColumnName();
+			columns.add(columnName);
+			
+			String field = CommentUtil.replaceUnderlineAndfirstToUpper(columnName);
+			fields.add(field);
+			
+			upperCaseFields.add(CommentUtil.toUpperCaseFirstOne(field));
+		}
+	}
+	public static String getDateString(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		return sdf.format(date);
+	}
+
+	/**
+	 * 如果路径不存在 ，则生成路径
+	 * @param path    文件 路径
+	 * @return void    返回类型
+	 */
+	public static void generaterPath(String path) {
+	    File file = new File(path);
+	    if (!file.exists()){
+	      file.mkdirs();
+	    }
+	}
+
+	/**
+	 * 生成文件，如果已经存在则覆盖
+	 * @param str	文件内容
+	 * @param path    文件路径
+	 * @return void    返回类型
+	 */
 	public static void generateFiles(String str, String path) {
 		FileOutputStream fos = null;
 		BufferedWriter bw = null;
@@ -96,85 +190,6 @@ public class CommentUtil {
 				}
 			}
 		}
-	}
-
-	public static BasicData getBasicData() {
-		if (basicData == null) {
-			setTempBasicData();
-			setExtendBasicData();
-		}
-		return basicData;
-	}
-
-	/**
-	 * 设置基本的模板数据
-	 * @return void    返回类型
-	 */
-	private static void setTempBasicData() {
-		basicData = new BasicData();
-		basicData.setDomainCname(Constant.DOMAIN_CNAME);
-		basicData.setDomainName(Constant.DOMAIN_NAME);
-		basicData.setAuthor(Constant.AUTHOR);
-		basicData.setTableName(Constant.TABLE_NAME);
-		basicData.setClassPath(Constant.CLASS_PAHT);
-		basicData.setJspPath(Constant.JSP_PATH);
-		basicData.setFilePath(Constant.FILE_PATH);
-		
-		basicData.setMapper("mapper");
-		basicData.setDomain("domain");
-		basicData.setVo("vo");
-		basicData.setService("service");
-		basicData.setServiceImpl("serviceImpl");
-		basicData.setDate(getDateString(new Date()));
-		
-		List<DataMeta> dataMetaList = DatabaseUtil.getDataMetaListByTableName(Constant.TABLE_NAME);
-		if (dataMetaList == null || dataMetaList.size() < 0) {
-			throw new RuntimeException("表字段数据不存在");
-		}
-
-		basicData.setDataMetaList(dataMetaList);
-		
-	}
-	
-	/**
-	 * 设置拓展的模板数据
-	 * @return void    返回类型
-	 */
-	private static void setExtendBasicData() {
-		
-		List<String> columns = basicData.getColumns();
-		List<String> fields = basicData.getFields();
-		List<String> upperCaseFields = basicData.getUpperCaseFields();
-		List<DataMeta> dataMetaList = basicData.getDataMetaList();
-		
-		//FIXME 去掉Map
-		Map<String, String> columnsMap = basicData.getColumnsMap();
-		
-		if (null != basicData.getDomainName()) {
-			basicData.setLowerCaseDomainName(CommentUtil.toLowerCaseFirstOne(basicData.getDomainName()));
-			basicData.setUpperCaseDomainName(CommentUtil.toUpperCaseFirstOne(basicData.getDomainName()));
-		}
-		for (DataMeta dataMeta : dataMetaList) {
-			dataMeta.getColumnType();
-			String columnName = dataMeta.getColumnName();
-			columns.add(columnName);
-			String field = CommentUtil.replaceUnderlineAndfirstToUpper(columnName);
-			fields.add(field);
-			upperCaseFields.add(CommentUtil.toUpperCaseFirstOne(field));
-		}
-		
-	}
-
-	public static String getDateString(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH:mm:ss");
-		return sdf.format(date);
-	}
-
-	public static void generaterPath(String path) {
-	    File file = new File(path);
-	    if (!file.exists()){
-	      file.mkdirs();
-	    }
 	}
 
 }

@@ -5,41 +5,16 @@ import com.tianque.base.domain.BaseDomain;
 /**
  * MetricTest
  * @author wangsihong@hztianque.com
- * @date 2018年11月07日08:33:11
+ * @date 2018年12月05日 17:39:07
  */
 public class MetricTest extends BaseDomain {
 
 	//TODO serialVersionUID
 
 	/**
-	 * 
-	 */
-	private Long collectTimestamp;
-
-	/**
-	 * 
+	 * 采集时间
 	 */
 	private Date collectTime;
-
-	/**
-	 * 
-	 */
-	private String metric;
-
-	/**
-	 * 
-	 */
-	private String projectType;
-
-	/**
-	 * 
-	 */
-	private Double value;
-
-	/**
-	 * 
-	 */
-	private Long cycle;
 
 	/**
 	 * 
@@ -49,15 +24,32 @@ public class MetricTest extends BaseDomain {
 	/**
 	 * 
 	 */
+	private String projectType;
+
+	/**
+	 * 
+	 */
+	private String metric;
+
+	/**
+	 * 
+	 */
 	private String tags;
 
-	public Long getCollectTimestamp() {
-		return collectTimestamp; 
-	}
+	/**
+	 * 
+	 */
+	private Long cycle;
 
-	public void setCollectTimestamp(Long collectTimestamp) {
-		this.collectTimestamp = collectTimestamp;
-	}
+	/**
+	 * 
+	 */
+	private Long collectTimestamp;
+
+	/**
+	 * 
+	 */
+	private Double value;
 
 	public Date getCollectTime() {
 		return collectTime; 
@@ -65,38 +57,6 @@ public class MetricTest extends BaseDomain {
 
 	public void setCollectTime(Date collectTime) {
 		this.collectTime = collectTime;
-	}
-
-	public String getMetric() {
-		return metric; 
-	}
-
-	public void setMetric(String metric) {
-		this.metric = metric;
-	}
-
-	public String getProjectType() {
-		return projectType; 
-	}
-
-	public void setProjectType(String projectType) {
-		this.projectType = projectType;
-	}
-
-	public Double getValue() {
-		return value; 
-	}
-
-	public void setValue(Double value) {
-		this.value = value;
-	}
-
-	public Long getCycle() {
-		return cycle; 
-	}
-
-	public void setCycle(Long cycle) {
-		this.cycle = cycle;
 	}
 
 	public Long getProjectId() {
@@ -107,6 +67,22 @@ public class MetricTest extends BaseDomain {
 		this.projectId = projectId;
 	}
 
+	public String getProjectType() {
+		return projectType; 
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+	public String getMetric() {
+		return metric; 
+	}
+
+	public void setMetric(String metric) {
+		this.metric = metric;
+	}
+
 	public String getTags() {
 		return tags; 
 	}
@@ -115,10 +91,34 @@ public class MetricTest extends BaseDomain {
 		this.tags = tags;
 	}
 
+	public Long getCycle() {
+		return cycle; 
+	}
+
+	public void setCycle(Long cycle) {
+		this.cycle = cycle;
+	}
+
+	public Long getCollectTimestamp() {
+		return collectTimestamp; 
+	}
+
+	public void setCollectTimestamp(Long collectTimestamp) {
+		this.collectTimestamp = collectTimestamp;
+	}
+
+	public Double getValue() {
+		return value; 
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString()+"MetricTest ["
-			+ "projectType=" + projectType + ", metric=" + metric + ", tags=" + tags + ", value=" + value + ", cycle=" + cycle + ", projectId=" + projectId + ", collectTimestamp=" + collectTimestamp + ", collectTime=" + collectTime + ", "
+			+ "collectTime=" + collectTime + ", projectId=" + projectId + ", projectType=" + projectType + ", metric=" + metric + ", tags=" + tags + ", cycle=" + cycle + ", collectTimestamp=" + collectTimestamp + ", value=" + value + ", "
 			+ "]";
 	}
 }

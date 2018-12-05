@@ -16,18 +16,40 @@ import com.tianque.monitor.metric.vo.MetricTestVO;
 /**
  * MetricTestController
  * @author wangsihong@hztianque.com
- * @date 2018年11月07日08:33:11
+ * @date 2018年12月05日 17:39:07
  */
 @Controller
 @RequestMapping(value = "/metricTest")
 public class MetricTestController {
 
-	private static final String LIST = "list";
 	private static final String ADD = "add";
+	private static final String MODE = "mode";
+	private static final String VIEW = "view";
 	private static final String UPDATE = "update";
 
 	@Autowired
 	private MetricTestService metricTestService;
+
+	@RequestMapping(value = "/dispatch")
+	public String dispatch(String mode, Long id, ModelMap modelMap) {
+		modelMap.put(MODE, mode);
+		if (ADD.equals(mode)) {
+		//TODO 设置路径
+		return "/metricTest/metricTestDlg";
+	}else if(UPDATE.equals(mode) || VIEW.equals(mode)) {
+		modelMap.put("metricTest", metricTestService.getMetricTestById(id));
+		//TODO 设置路径
+		return "/metricTest/metricTestDlg";
+	}
+	//TODO 设置路径
+	return "/metricTest/metricTestDlg";
+	}
+
+	@PermissionFilter(ename = "metricTest")
+	@RequestMapping(value = "/listPage")
+	public String listPage() {
+		return "/metricTest/metricTestList";
+	}
 
 	@RequestMapping(value = "/addMetricTest")
 	@ResponseBody
@@ -39,23 +61,6 @@ public class MetricTestController {
 	@ResponseBody
 	public MetricTest updateMetricTest(@ModelAttribute MetricTest metricTest) {
 		return metricTestService.updateMetricTest(metricTest);
-	}
-
-	@RequestMapping(value = "/dispatch")
-	public String dispatch(String mode, Long id, ModelMap modelMap) {
-		if (ADD.equals(mode)) {
-		//TODO 设置路径
-		return "/metricTest/addMetricTestDlg";
-	}else if(UPDATE.equals(mode)) {
-		modelMap.put("metricTest", metricTestService.getMetricTestById(id));
-		//TODO 设置路径
-		return "/metricTest/updateMetricTestDlg";
-	}else if(LIST.equals(mode)) {
-		//TODO 设置路径
-		return "/metricTest/metricTestList";
-	}
-	//TODO 设置路径
-	return "/metricTest/addMetricTestDlg";
 	}
 
 	@RequestMapping(value = "/deleteMetricTestByIds")

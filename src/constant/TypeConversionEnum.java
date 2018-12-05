@@ -45,9 +45,9 @@ public enum TypeConversionEnum {
 		this.mysqlType = mysqlType;
 	}
 
-	public String getJavaTypeByMysqlType(String MysqlType) {
+	public static String getJavaTypeByMysqlType(String MysqlType) {
 		for (TypeConversionEnum typeConversionEnum : values()) {
-			if (typeConversionEnum.getMysqlType().equals(mysqlType)) {
+			if (typeConversionEnum.getMysqlType().equals(MysqlType)) {
 				return typeConversionEnum.javaType;
 			}
 		}
