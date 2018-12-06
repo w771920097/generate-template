@@ -7,10 +7,9 @@ public class DomainNameValidatorGenerater extends AbstractGenerater {
 	@Override
 	protected void setBasicData() {
 		basicData.setFolderName("validate");
-		basicData.setSuffix("DomainNameValidator.java");
+		basicData.setSuffix(basicData.getUpperCaseDomainName()+"Validator.java");
 	}
 
-	//TODO
 	@Override
 	protected String building() {
 		StringBuilder sb = new StringBuilder();
