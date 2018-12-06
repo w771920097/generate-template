@@ -8,12 +8,16 @@ import java.util.Map;
 import constant.Constant;
 import generateplus.generater.AbstractGenerater;
 import generateplus.generater.impl.ControllerGenerater;
+import generateplus.generater.impl.DialogModeGenerater;
 import generateplus.generater.impl.DlgJspGenerater;
 import generateplus.generater.impl.DomainGenerater;
+import generateplus.generater.impl.DomainNameValidatorGenerater;
+import generateplus.generater.impl.DomainValidatorGenerater;
 import generateplus.generater.impl.JavaMapperGenerater;
 import generateplus.generater.impl.ListJspGenerater;
 import generateplus.generater.impl.ServcieGenerater;
 import generateplus.generater.impl.ServiceImplGenerater;
+import generateplus.generater.impl.ValidateResultGenerater;
 import generateplus.generater.impl.VoGenerater;
 import generateplus.generater.impl.XmlMapperGenerater;
 
@@ -37,6 +41,10 @@ public class Results {
 		AbstractGenerater servcieGenerater = new ServcieGenerater();
 		AbstractGenerater serviceImplGenerater = new ServiceImplGenerater();
 		AbstractGenerater voGenerater = new VoGenerater();
+		AbstractGenerater dialogModeGenerater = new DialogModeGenerater();
+		AbstractGenerater validateResultGenerater = new ValidateResultGenerater();
+		AbstractGenerater domainValidatorGenerater = new DomainValidatorGenerater();
+		AbstractGenerater domainNameValidatorGenerater = new DomainNameValidatorGenerater();
 		
 		map.put("controller", controllerGenerater);
 		map.put("dlgJsp", dlgJspGenerater);
@@ -45,8 +53,14 @@ public class Results {
 		map.put("listJsp", listJspGenerater);
 		map.put("service", servcieGenerater);
 		map.put("serviceImpl", serviceImplGenerater);
-		map.put("vo", voGenerater);
 		map.put("xmlMapper", XmlMapperGenerater);
+		map.put("vo", voGenerater);
+		map.put("dialogMode", dialogModeGenerater);
+		map.put("validateResult", validateResultGenerater);
+		map.put("domainValidator", domainValidatorGenerater);
+		map.put("domainNameValidator", domainNameValidatorGenerater);
+		
+		//TODO 注册
 
 	}
 

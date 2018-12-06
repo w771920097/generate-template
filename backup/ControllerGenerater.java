@@ -30,7 +30,6 @@ public class ControllerGenerater extends AbstractGenerater {
 		sb.append("import org.springframework.web.bind.annotation.ResponseBody;\n\n");
 
 		sb.append("import com.tianque.base.vo.GridPage;\n");
-		sb.append("import " + basicData.getClassPath() + ".constant.DialogMod;\n");
 		sb.append("import " + basicData.getClassPath() + ".domain." + basicData.getUpperCaseDomainName() + ";\n");
 		sb.append(
 				"import " + basicData.getClassPath() + ".service." + basicData.getUpperCaseDomainName() + "Service;\n");
@@ -56,23 +55,18 @@ public class ControllerGenerater extends AbstractGenerater {
 		sb.append("\t@RequestMapping(value = \"/dispatch\")\n");
 		sb.append("\tpublic String dispatch(String mode, Long id, ModelMap modelMap) {\n");
 		sb.append("\t\tmodelMap.put(MODE, mode);\n");
-		// mode=add
-		sb.append("\t\tif (DialogMode.ADD.equals(mode)) {\n");
+		sb.append("\t\tif (ADD.equals(mode)) {\n");
 		sb.append("\t\t//TODO 设置路径\n");
 		sb.append("\t\treturn \"/" + basicData.getLowerCaseDomainName() + "/" + basicData.getLowerCaseDomainName()
 				+ "Dlg\";\n");
-		// mode=edit
-		sb.append("\t\t}else if(DialogMode.EDIT.equals(mode) || VIEW.equals(mode)) {\n");
-		sb.append("\t\t\tmodelMap.put(\"" + basicData.getLowerCaseDomainName() + "\", " + basicData.getLowerCaseDomainName()
+		sb.append("\t}else if(UPDATE.equals(mode) || VIEW.equals(mode)) {\n");
+		sb.append(
+				"\t\tmodelMap.put(\"" + basicData.getLowerCaseDomainName() + "\", " + basicData.getLowerCaseDomainName()
 						+ "Service.get" + basicData.getUpperCaseDomainName() + "ById(id));\n");
-		sb.append("\t\t\t//TODO 设置路径\n");
-		sb.append("\t\t\treturn \"/" + basicData.getLowerCaseDomainName() + "/" + basicData.getLowerCaseDomainName()
+		sb.append("\t\t//TODO 设置路径\n");
+		sb.append("\t\treturn \"/" + basicData.getLowerCaseDomainName() + "/" + basicData.getLowerCaseDomainName()
 				+ "Dlg\";\n");
-		// mode=search
-		sb.append("\t\t}else if(DialogMode.SEARCH.equals(mode) || VIEW.equals(mode)) {\n");
-		sb.append("\t\t\t//TODO 设置路径\n");
-		sb.append("\t\t\treturn \"/" + basicData.getLowerCaseDomainName() + "/search" + basicData.getLowerCaseDomainName()
-				+ "Dlg\";\n");
+		sb.append("\t}\n");
 		sb.append("\t//TODO 设置路径\n");
 		sb.append("\treturn \"/" + basicData.getLowerCaseDomainName() + "/" + basicData.getLowerCaseDomainName()
 				+ "Dlg\";\n");

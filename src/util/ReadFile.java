@@ -5,12 +5,15 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class ReadFile {
+
+	public static void main(String[] args) {
+		String filePath = "C:\\Users\\Administrator\\Desktop\\MachineValidator.java"; //读取的文件夹路径  
+		readForTemplate(filePath);
+	}
 	
-	
-	public static void readForTemplate() {
+	public static void readForTemplate(String filePath) {
 //		  dlg.txt
-			String filePath = "C:\\Users\\n-340\\Desktop\\ApplicationManagementController.java"; //读取的文件夹路径  
-	        try {  
+			try {  
 	        	//输出的文件夹路径
 //	        	FileWriter fw = new FileWriter("C:\\Users\\n-340\\Desktop\\112.txt", true);
 //	            BufferedWriter bw = new BufferedWriter(fw);
@@ -32,5 +35,6 @@ public class ReadFile {
 	        }  
 		
 	}
+	
 
 }
