@@ -25,7 +25,7 @@ public class DomainNameValidatorGenerater extends AbstractGenerater {
 		sb.append("public class "+basicData.getUpperCaseDomainName()+"Validator implements DomainValidator<"+basicData.getUpperCaseDomainName()+"> {\n");
 		sb.append("\n");
 		sb.append("\t@Override\n");
-		sb.append("\tpublic ValidateResult validate("+basicData.getUpperCaseDomainName()+" "+basicData.getLowerCaseDomainName()+", Integer validateMode) {\n");
+		sb.append("\tpublic ValidateResult validate(Integer validateMode,"+basicData.getUpperCaseDomainName()+" "+basicData.getLowerCaseDomainName()+") {\n");
 		sb.append("\t\t\n");
 		
 		sb.append("\t\tValidateResult result = new ValidateResult();\n");

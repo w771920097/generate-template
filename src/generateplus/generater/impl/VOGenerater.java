@@ -8,12 +8,12 @@ import generateplus.generater.AbstractGenerater;
  * @author wangsihong@hztianque.com
  * @date 2018年10月26日 下午1:44:21
  */
-public class VoGenerater extends AbstractGenerater {
+public class VOGenerater extends AbstractGenerater {
 
 	@Override
 	protected void setBasicData() {
 		basicData.setFolderName("vo");
-		basicData.setSuffix(basicData.getUpperCaseDomainName() + "Vo.java");
+		basicData.setSuffix(basicData.getUpperCaseDomainName() + "VO.java");
 	}
 
 	@Override

@@ -40,26 +40,25 @@ public class ListJspGenerater extends AbstractGenerater {
 		sb.append("\t\t\t<div id=\"" + basicData.getDomainName() + "Button\">\n");
 		sb.append("\t\t\t\t<div class=\"tc-15-action-panel\">\n");
 		sb.append("\t\t\t\t\t<div data-role=\"qc-search\" style=\"\" class=\"tc-15-search tc-15-multi-search\">\n");
-		sb.append("\t\t\t\t\t\t<div class=\"search-int-mod\">\n");
-		sb.append("\t\t\t\t\t\t\t<input id=\"searchText\" type=\"text\" placeholder=\"请输入关键词\">\n");
-		sb.append("\t\t\t\t\t\t\t<button id=\"serach\" type=\"submit\">\n");
-		sb.append("\t\t\t\t\t\t\t\t<i class=\"web-icos search-ico\"></i>\n");
-		sb.append("\t\t\t\t\t\t\t</button>\n");
+		
+		sb.append("\t\t\t\t\t\t<div class=\"iv-search\">\n");
+		sb.append("\t\t\t\t\t\t\t<input id=\"searchText\" data-input=\"\" type=\"text\" class=\"text-input\" placeholder=\"请输入关键词\"/>\n");
+		sb.append("\t\t\t\t\t\t\t<button  id=\"serach\" data-search=\"\" class=\"iv-search-btn\"></button>\n");
 		sb.append("\t\t\t\t\t\t</div>\n");
 		sb.append("\t\t\t\t\t</div>\n");
 
 		// 按钮
 		sb.append("\t\t\t\t\t<pop:permissionTag ename=\"add" + basicData.getUpperCaseDomainName() + "\">\n");
-		sb.append("\t\t\t\t\t\t<button id=\"add\" type=\"button\" class=\"tc-15-btn m\">新增</button>\n");
+		sb.append("\t\t\t\t\t\t<button id=\"add\" type=\"button\" class=\"default-button\">新增</button>\n");
 		sb.append("\t\t\t\t\t</pop:permissionTag>\n");
 		sb.append("\t\t\t\t\t<pop:permissionTag ename=\"delete" + basicData.getUpperCaseDomainName() + "\">\n");
-		sb.append("\t\t\t\t\t\t<button id=\"delete\" type=\"button\" class=\"tc-15-btn m\">删除</button>\n");
+		sb.append("\t\t\t\t\t\t<button id=\"delete\" type=\"button\" class=\"default-button\">删除</button>\n");
 		sb.append("\t\t\t\t\t</pop:permissionTag>\n");
 		sb.append("\t\t\t\t\t<pop:permissionTag ename=\"update" + basicData.getUpperCaseDomainName() + "\">\n");
-		sb.append("\t\t\t\t\t\t<button id=\"update\" type=\"button\" class=\"tc-15-btn m\">修改</button>\n");
+		sb.append("\t\t\t\t\t\t<button id=\"update\" type=\"button\" class=\"default-button\">修改</button>\n");
 		sb.append("\t\t\t\t\t</pop:permissionTag>\n");
-		sb.append("\t\t\t\t\t<button id=\"view\" type=\"button\" class=\"tc-15-btn m\">查看</button>\n");
-		sb.append("\t\t\t\t\t<button id=\"reload\" type=\"button\" class=\"tc-15-btn m\">刷新</button>\n");
+		sb.append("\t\t\t\t\t<button id=\"view\" type=\"button\" class=\"default-button\">查看</button>\n");
+		sb.append("\t\t\t\t\t<button id=\"reload\" type=\"button\" class=\"default-button\">刷新</button>\n");
 		sb.append("\t\t\t\t</div>\n");
 		sb.append("\t\t\t</div>\n");
 		sb.append("\t\t\t<div style=\"width: 100%;\">\n");
@@ -72,6 +71,10 @@ public class ListJspGenerater extends AbstractGenerater {
 		sb.append("</div>\n");
 		sb.append("<script type=\"text/javascript\">\n");
 		sb.append("\t$(document).ready(function(){\n");
+		
+		sb.append("\t\tvar width = 400; \n");
+		sb.append("\t\tvar height = 300;\n");
+		
 		sb.append("\t\tdocument.onkeydown=function(event){\n");
 		sb.append("\t\t\tvar e = event || window.event || arguments.callee.caller.arguments[0];\t  \n");
 		sb.append("\t\t\t if(e && e.keyCode==13){ // enter 键\n");
@@ -102,7 +105,7 @@ public class ListJspGenerater extends AbstractGenerater {
 			
 			if (!"id".equals(field)) {
 				String column = columns.get(i);
-				sb.append("\t\t\t\t\t\t {name : \"" + field + "\",index : \"" + column + "\",label:'" + field
+				sb.append("\t\t\t\t\t\t {name : \"" + field + "\",index : \"" + column + "\",label:'" + commont
 						+ "',sortable : true,align : 'center'},\n");
 			}
 		}
@@ -119,8 +122,8 @@ public class ListJspGenerater extends AbstractGenerater {
 		// 查看 方法
 		sb.append("\t\tfunction show" + basicData.getUpperCaseDomainName() + "(rowId){\n");
 		sb.append("\t\t\t$('#" +basicData.getDomainName() + "Dialog').createDialog({\t  \n");
-		sb.append("\t\t\t\twidth: 600,\t\t\t\t\t\t\t\n");
-		sb.append("\t\t\t\theight: 500,\n");
+		sb.append("\t\t\t\twidth: width,\t\t\t\t\t\t\t\n");
+		sb.append("\t\t\t\theight: height,\n");
 		sb.append("\t\t\t\ttitle:'查看" + basicData.getDomainCname() + "',\n");
 		sb.append("\t\t\t\turl:'/" + basicData.getDomainName() + "/dispatch?mode=view&id='+rowId,\t \n");
 		sb.append("\t\t\t\tbuttons: {\n");
@@ -184,8 +187,8 @@ public class ListJspGenerater extends AbstractGenerater {
 		// 新增按钮
 		sb.append("\t\t$(\"#add\").click(function(){\n");
 		sb.append("\t\t\t$('#" + basicData.getDomainName() + "Dialog').createDialog({\t  \n");
-		sb.append("\t\t\t\twidth: 600,\t\t\t\t\t\t\t\n");
-		sb.append("\t\t\t\theight: 500,\n");
+		sb.append("\t\t\t\twidth: width,\t\t\t\t\t\t\t\n");
+		sb.append("\t\t\t\theight: height,\n");
 		sb.append("\t\t\t\ttitle:'新增" + basicData.getDomainCname() + "',\n");
 		sb.append("\t\t\t\turl:'/" + basicData.getDomainName() + "/dispatch?mode=add',\t \n");
 		sb.append("\t\t\t\tbuttons: {\n");
@@ -226,10 +229,10 @@ public class ListJspGenerater extends AbstractGenerater {
 		sb.append("\t\t\t\treturn;\n");
 		sb.append("\t\t\t}\n");
 		sb.append("\t\t\t$('#" + basicData.getDomainName() + "Dialog').createDialog({\t  \n");
-		sb.append("\t\t\t\twidth: 600,\t\t\t\t\t\t\t\n");
-		sb.append("\t\t\t\theight: 500,\n");
+		sb.append("\t\t\t\twidth: width,\t\t\t\t\t\t\t\n");
+		sb.append("\t\t\t\theight: height,\n");
 		sb.append("\t\t\t\ttitle:'修改" + basicData.getDomainCname() + "',\n");
-		sb.append("\t\t\t\turl:'/" + basicData.getDomainName() + "/dispatch?mode=update&id='+selectedIds,\t \n");
+		sb.append("\t\t\t\turl:'/" + basicData.getDomainName() + "/dispatch?mode=edit&id='+selectedIds,\t \n");
 		sb.append("\t\t\t\tbuttons: {\n");
 		sb.append("\t\t\t\t\t\"保存\" : function(){\n");
 		sb.append("\t\t\t\t\t\t$(\"#maintainForm\").submit();\n");

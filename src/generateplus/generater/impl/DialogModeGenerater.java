@@ -18,10 +18,11 @@ public class DialogModeGenerater extends AbstractGenerater {
 		sb.append("\n");
 		sb.append("public interface DialogMode {\n");
 		sb.append("\t\n");
-		sb.append("\tString ADD = \"add\";\n");
-		sb.append("\tString EDIT = \"edit\";\n");
-		sb.append("\tString VIEW = \"view\";\n");
-		sb.append("\tString SEARCH = \"search\";\n");
+		sb.append("\tString MODE = \"mode\";\n");
+		sb.append("\tString ADD_MODE = \"add\";\n");
+		sb.append("\tString EDIT_MODE = \"edit\";\n");
+		sb.append("\tString VIEW_MODE = \"view\";\n");
+		sb.append("\tString SEARCH_MODE = \"search\";\n");
 		sb.append("}\n");
 		
 		return sb.toString();

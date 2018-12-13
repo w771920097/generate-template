@@ -18,7 +18,7 @@ import generateplus.generater.impl.ListJspGenerater;
 import generateplus.generater.impl.ServcieGenerater;
 import generateplus.generater.impl.ServiceImplGenerater;
 import generateplus.generater.impl.ValidateResultGenerater;
-import generateplus.generater.impl.VoGenerater;
+import generateplus.generater.impl.VOGenerater;
 import generateplus.generater.impl.XmlMapperGenerater;
 
 /**
@@ -40,7 +40,7 @@ public class Results {
 		AbstractGenerater javaMapperGenerater = new JavaMapperGenerater();
 		AbstractGenerater servcieGenerater = new ServcieGenerater();
 		AbstractGenerater serviceImplGenerater = new ServiceImplGenerater();
-		AbstractGenerater voGenerater = new VoGenerater();
+		AbstractGenerater voGenerater = new VOGenerater();
 		AbstractGenerater dialogModeGenerater = new DialogModeGenerater();
 		AbstractGenerater validateResultGenerater = new ValidateResultGenerater();
 		AbstractGenerater domainValidatorGenerater = new DomainValidatorGenerater();

@@ -22,7 +22,7 @@ public class JavaMapperGenerater extends AbstractGenerater {
 		sb.append("package " + basicData.getClassPath() + "." + basicData.getFolderName() + ";\n\n");
 		sb.append("import java.util.List;\n\n");
 		sb.append("import com.tianque.core.mybatis.MyBatisMapper;\n");
-		sb.append("import " + basicData.getClassPath() + "." + basicData.getLowerCaseDomainName() + "." + basicData.getUpperCaseDomainName() + ";\n\n");
+		sb.append("import " + basicData.getClassPath() + ".domain." + basicData.getUpperCaseDomainName() + ";\n\n");
 		sb.append("/**\n");
 		sb.append(" * " + basicData.getUpperCaseDomainName() + "Mapper\n");
 		sb.append(" * @author " + basicData.getAuthor() + "\n");

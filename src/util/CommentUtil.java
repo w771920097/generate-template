@@ -27,9 +27,8 @@ public class CommentUtil {
 	
 	public static void main(String[] args) {
 		String path = Constant.FILE_PATH;
-		System.out.println(File.separator);
 		System.out.println(path);
-		path = path.replace("/", "\\").replace("\\", File.separator);
+		path = path.replace("/", "\\").replace("\\", "\\\\");
 
 		System.out.println(path);
 	}

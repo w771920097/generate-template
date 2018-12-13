@@ -17,7 +17,7 @@ public class DomainValidatorGenerater extends AbstractGenerater {
 		sb.append("package "+basicData.getClassPath()+"."+basicData.getFolderName()+";\n");
 		sb.append("\n");
 		sb.append("public interface DomainValidator<T> {\n");
-		sb.append("\tpublic ValidateResult validate(T domain, Integer mode);\n");
+		sb.append("\tpublic ValidateResult validate(Integer mode, T domain);\n");
 		sb.append("\t\n");
 		sb.append("}\n");
 

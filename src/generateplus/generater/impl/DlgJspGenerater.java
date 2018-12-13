@@ -78,25 +78,6 @@ public class DlgJspGenerater extends AbstractGenerater {
 			}
 			
 		}
-		for (String field : fields) {
-			if ("id".equals(field) || "updateDate".equals(field) || "updateUser".equals(field)
-					|| "createDate".equals(field) || "createUser".equals(field)) {
-				continue;
-			}
-			if (field.endsWith("Date")) {
-
-			} else {
-				sb.append("\t\t<div class=\"grid_5 label-right\">\n");
-				sb.append("\t\t\t<em class=\"form-req\">*</em> <label class=\"form-lb1\">" + field + "：</label>\n");
-				sb.append("\t\t</div>\n");
-				sb.append("\t\t<div class=\"grid_7\">\n");
-				sb.append("\t\t\t<input type=\"text\" name=\"" + field + "\" id=\"" + field + "\" maxlength=\"20\"\n");
-				sb.append("\t\t\t\tvalue=\"${" + basicData.getDomainName() + "." + field + "}\"\n");
-				sb.append("\t\t\t\tclass=\"text-input {required:true,messages:{required:'请输入" + field + "'}}\">\n");
-				sb.append("\t\t</div>\n");
-				sb.append("\n");
-			}
-		}
 
 		sb.append("\t\t<div class=\"clearLine\">&nbsp;</div>\n");
 		sb.append("\t</form>\n");
@@ -111,7 +92,7 @@ public class DlgJspGenerater extends AbstractGenerater {
 		sb.append("\t\t\t\tif (mode == \"add\") {\n");
 		sb.append("\t\t\t\t\t$(\"#maintainForm\").attr(\"action\",\n");
 		sb.append("\t\t\t\t\t\t\t\"/" + basicData.getDomainName() + "/add" + basicData.getUpperCaseDomainName() + "\");\n");
-		sb.append("\t\t\t\t} else if (mode == \"update\") {\n");
+		sb.append("\t\t\t\t} else if (mode == \"edit\") {\n");
 		sb.append("\t\t\t\t\t$(\"#maintainForm\").attr(\"action\",\n");
 		sb.append("\t\t\t\t\t\t\t\"/" + basicData.getDomainName() + "/update" + basicData.getUpperCaseDomainName() + "\");\n");
 		sb.append("\t\t\t\t} else if (mode == \"view\") {\n");
