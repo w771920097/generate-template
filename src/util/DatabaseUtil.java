@@ -24,9 +24,11 @@ public class DatabaseUtil {
   private static final String QUERY_DATA_META_SQL =
       " SELECT \r\n" + "   TABLE_SCHEMA AS `databaseName`,\r\n"
           + "   TABLE_NAME AS `tableName`,\r\n" + "   COLUMN_NAME AS `columnName`,\r\n"
-          + "   DATA_TYPE AS `columnType`,\r\n" + "   COLUMN_COMMENT AS `columnComment` \r\n"
+          + "   DATA_TYPE AS `columnType`,\r\n" + "   COLUMN_COMMENT AS `columnComment`, \r\n"
+          + "   CHARACTER_MAXIMUM_LENGTH  AS `characterMaximumLength`,\n" + "   IS_NULLABLE  AS `isNullable`,\n"
+          + "   NUMERIC_PRECISION AS `numericPrecision` \n"
           + " FROM\r\n" + "   `information_schema`.`COLUMNS` \r\n"
-          + " WHERE `TABLE_SCHEMA` = '数据库名称' \r\n" + "   AND `TABLE_NAME` = '表名' ;";
+          + " WHERE `TABLE_SCHEMA` = '${DBName}' \r\n" + "   AND `TABLE_NAME` = '${tableName}'";
 
   /**
    * 获取数据库连接
@@ -243,15 +245,62 @@ public class DatabaseUtil {
     }
     return list;
   }
+  
+  public static List<DataMeta> getDataMetaByTableNameAndDBName(String tableName, String DBName){
+
+	    List<String> columnNames = new ArrayList<String>(); // 列名
+	    List<String> columnTypes = new ArrayList<String>(); // 列类型
+	    List<String> columnComments = new ArrayList<String>();// 列注释
+	    List<DataMeta> list = new ArrayList<DataMeta>(); // 数据元
+	    // 与数据库的连接
+	    Connection conn = getConnection();
+	    PreparedStatement pStemt = null;
+	    
+	  String sql = QUERY_DATA_META_SQL.replace("${tableName}", tableName).replace("${DBName}", DBName);
+	  
+
+	  System.out.println("sql>"+sql);
+	    ResultSet rs = null;
+	    try {
+	      pStemt = conn.prepareStatement(sql);
+	      rs = pStemt.executeQuery(QUERY_DATA_META_SQL);
+
+	      System.out.println(pStemt);
+	      while (rs.next()) {
+	    	  System.out.println(rs);
+	      }
+	    }catch (Exception e) {
+	        e.printStackTrace();
+		}
+
+
+//	      // 结果集元数据
+//	      ResultSetMetaData rsmd = pStemt.getMetaData();
+//	      // 表列数
+//	      int size = rsmd.getColumnCount();
+//	      for (int i = 0; i < size; i++) {
+//	        columnTypes.add(rsmd.getColumnTypeName(i + 1));
+//	        columnNames.add(rsmd.getColumnName(i + 1));
+//	      }
+	      // 封装到DataMeta
+//	      for (int i = 0; i < columnNames.size(); i++) {
+//	        DataMeta dataMeta = new DataMeta();
+//	        columnNames.get(i);
+//	        dataMeta.setColumnType(columnTypes.get(i));
+//	        dataMeta.setColumnName(columnNames.get(i));
+//	        dataMeta.setCommont(columnComments.get(i));
+//	        list.add(dataMeta);
+//	      }
+	  return list;
+  }
 
   public static void main(String[] args) {
 
 
     String tableName = Constant.TABLE_NAME;
-    List<DataMeta> dataMetaList = getDataMetaListByTableName(tableName);
+    List<DataMeta> dataMetaList = getDataMetaByTableNameAndDBName(tableName, "usercenter");
     // List<String> tableNames = getTableNames();
     // System.out.println("tableNames:" + tableNames);
-    System.out.println("tableName:" + tableName);
     for (DataMeta dataMeta : dataMetaList) {
       System.out.print("," + dataMeta.getColumnName());
     }
