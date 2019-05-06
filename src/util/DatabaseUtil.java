@@ -9,6 +9,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.jdbc.StringUtils;
 import com.sun.xml.internal.ws.util.UtilException;
 import constant.Constant;
 import generateplus.domain.DataMeta;
@@ -248,9 +250,6 @@ public class DatabaseUtil {
   
   public static List<DataMeta> getDataMetaByTableNameAndDBName(String tableName, String DBName){
 
-	    List<String> columnNames = new ArrayList<String>(); // 列名
-	    List<String> columnTypes = new ArrayList<String>(); // 列类型
-	    List<String> columnComments = new ArrayList<String>();// 列注释
 	    List<DataMeta> list = new ArrayList<DataMeta>(); // 数据元
 	    // 与数据库的连接
 	    Connection conn = getConnection();
@@ -259,38 +258,54 @@ public class DatabaseUtil {
 	  String sql = QUERY_DATA_META_SQL.replace("${tableName}", tableName).replace("${DBName}", DBName);
 	  
 
-	  System.out.println("sql>"+sql);
+//	  System.out.println("sql>"+sql);
 	    ResultSet rs = null;
 	    try {
 	      pStemt = conn.prepareStatement(sql);
-	      rs = pStemt.executeQuery(QUERY_DATA_META_SQL);
+	      rs = pStemt.executeQuery();
 
-	      System.out.println(pStemt);
 	      while (rs.next()) {
-	    	  System.out.println(rs);
+          System.out.print(rs.getString("databaseName") + "\t");
+          System.out.print(rs.getString("tableName") + "\t");
+          System.out.print(rs.getString("columnName") + "\t");
+          System.out.print(rs.getString("columnType") + "\t");
+          System.out.print(rs.getString("columnComment") + "\t");
+          System.out.print(rs.getString("characterMaximumLength") + "\t");
+          System.out.print(rs.getString("numericPrecision") + "\t");
+          System.out.print(rs.getString("isNullable") + "\t");
+	    	  System.out.println();
+
+          String columnType = rs.getString("columnType");
+          String columnName = rs.getString("columnName");
+          String columnComment = rs.getString("columnComment");
+          String characterMaximumLength = rs.getString("characterMaximumLength");
+          String numericPrecision = rs.getString("numericPrecision");
+          String isNullable = rs.getString("isNullable");
+	    	  
+          DataMeta dataMeta = new DataMeta();
+          
+          dataMeta.setColumnType(columnType);
+          dataMeta.setColumnName(columnName);
+          dataMeta.setCommont(columnComment);
+          
+          if(!StringUtils.isNullOrEmpty(characterMaximumLength)) {
+            dataMeta.setCharacterMaximumLength(Integer.valueOf(characterMaximumLength));
+          }else if(!StringUtils.isNullOrEmpty(numericPrecision)) {
+            dataMeta.setCharacterMaximumLength(Integer.valueOf(numericPrecision));
+          }
+          
+          if(!StringUtils.isNullOrEmpty(isNullable) && isNullable.equals("YES")) {
+            dataMeta.setIsNullable(true);
+          }else {
+            dataMeta.setIsNullable(false);
+          }
+          list.add(dataMeta);
 	      }
 	    }catch (Exception e) {
 	        e.printStackTrace();
 		}
 
 
-//	      // 结果集元数据
-//	      ResultSetMetaData rsmd = pStemt.getMetaData();
-//	      // 表列数
-//	      int size = rsmd.getColumnCount();
-//	      for (int i = 0; i < size; i++) {
-//	        columnTypes.add(rsmd.getColumnTypeName(i + 1));
-//	        columnNames.add(rsmd.getColumnName(i + 1));
-//	      }
-	      // 封装到DataMeta
-//	      for (int i = 0; i < columnNames.size(); i++) {
-//	        DataMeta dataMeta = new DataMeta();
-//	        columnNames.get(i);
-//	        dataMeta.setColumnType(columnTypes.get(i));
-//	        dataMeta.setColumnName(columnNames.get(i));
-//	        dataMeta.setCommont(columnComments.get(i));
-//	        list.add(dataMeta);
-//	      }
 	  return list;
   }
 
